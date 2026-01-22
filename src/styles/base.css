@@ -1,0 +1,12 @@
+body {
+	background-color: var(--surface);
+	color: var(--text);
+	font-family: 'Source Serif', serif;
+	font-weight: var(--font-weight-3);
+}
+
+h1 {
+	font-family: Ephesis, cursive;
+	font-weight: var(--font-weight-4);
+	font-size: var(--size-10);
+}
