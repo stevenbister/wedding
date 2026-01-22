@@ -1,0 +1,46 @@
+@font-face {
+	font-family: 'Source Serif';
+	src: url('/fonts/SourceSerif4-Light.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Source Serif';
+	src: url('/fonts/SourceSerif4-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ephesis';
+	src: url('/fonts/Ephesis-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+:where(html) {
+	--surface-light: var(--brown-0);
+	--surface-dark: var(--sand-11);
+
+	--text-light: var(--green-12);
+	--text-dark: var(--green-0);
+}
+
+:root {
+	--surface: var(--surface-light);
+
+	--text: var(--text-light);
+}
+
+/* TODO: decide how this will look in dark mode - do we want dark mode? */
+/*@media (prefers-color-scheme: dark) {
+	:root {
+		--surface: var(--surface-dark);
+
+		--text: var(--text-dark);
+	}
+}*/
