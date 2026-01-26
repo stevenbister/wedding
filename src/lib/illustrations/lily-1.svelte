@@ -53,7 +53,7 @@
 		width: var(--size);
 		height: var(--size);
 
-		@media (min-width: 48rem) {
+		@media (min-width: 36rem) {
 			--size: 250px;
 		}
 

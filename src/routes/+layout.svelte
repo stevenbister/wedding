@@ -35,10 +35,10 @@
 	}
 
 	:global(.lily-1) {
-		top: -60px;
-		left: -55px;
+		top: -40px;
+		left: -75px;
 
-		@media (min-width: 48rem) {
+		@media (min-width: 36rem) {
 			top: -90px;
 			left: -30px;
 		}
@@ -53,7 +53,7 @@
 		top: -36px;
 		right: -46px;
 
-		@media (min-width: 48rem) {
+		@media (min-width: 36rem) {
 			top: -95px;
 			right: -95px;
 		}

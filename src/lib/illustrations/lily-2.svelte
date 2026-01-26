@@ -60,8 +60,8 @@
 		width: var(--size);
 		height: var(--size);
 
-		@media (min-width: 48rem) {
-			--size: 350px;
+		@media (min-width: 36rem) {
+			--size: 320px;
 		}
 
 		@media (min-width: 80rem) {
