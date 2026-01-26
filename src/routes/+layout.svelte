@@ -1,7 +1,11 @@
 <script lang="ts">
+	import Lily1 from '$lib/illustrations/lily-1.svelte';
+	import Lily2 from '$lib/illustrations/lily-2.svelte';
+	import Header from '$/lib/components/header.svelte';
 	import favicon from '$lib/assets/favicon.svg';
 
 	import '$styles/main.css';
+	import Footer from '$/lib/components/footer.svelte';
 
 	let { children } = $props();
 </script>
@@ -10,4 +14,48 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-{@render children()}
+<Lily1 />
+<Lily2 />
+<Header />
+
+<main>
+	{@render children()}
+</main>
+
+<Footer />
+
+<style>
+	main {
+		flex: 1 0 auto;
+	}
+
+	:global(.lily-1),
+	:global(.lily-2) {
+		position: absolute;
+	}
+
+	:global(.lily-1) {
+		top: -60px;
+		left: -55px;
+
+		@media (min-width: 48rem) {
+			top: -90px;
+			left: -30px;
+		}
+
+		@media (min-width: 80rem) {
+			top: -135px;
+			left: -55px;
+		}
+	}
+
+	:global(.lily-2) {
+		top: -36px;
+		right: -46px;
+
+		@media (min-width: 48rem) {
+			top: -95px;
+			right: -95px;
+		}
+	}
+</style>
