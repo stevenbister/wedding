@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { buildMetaTitle } from '$/lib/utils/meta';
 	import { page } from '$app/state';
 	import SuitAndDress from '$lib/illustrations/suit-and-dress.svelte';
 	import { gsap } from 'gsap';
@@ -19,7 +20,7 @@
 </script>
 
 <svelte:head>
-	<title>{message}</title>
+	<title>{buildMetaTitle(message)}</title>
 </svelte:head>
 
 <div class="container flex-col align-center">
