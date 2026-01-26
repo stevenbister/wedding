@@ -1,12 +1,34 @@
+html,
+body {
+	height: 100%;
+	position: relative;
+	overflow-x: clip;
+}
+
 body {
 	background-color: var(--surface);
 	color: var(--text);
 	font-family: 'Source Serif', serif;
 	font-weight: var(--font-weight-3);
+	font-size: var(--font-size-3);
+	display: flex;
+	flex-direction: column;
+}
+
+h1,
+h2 {
+	font-family: Ephesis, cursive;
+	font-weight: var(--font-weight-4);
 }
 
 h1 {
-	font-family: Ephesis, cursive;
-	font-weight: var(--font-weight-4);
 	font-size: var(--size-10);
+}
+
+h2 {
+	font-size: var(--font-size-7);
+}
+
+p {
+	line-height: var(--font-lineheight-1);
 }
