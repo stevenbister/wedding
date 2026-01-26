@@ -4,7 +4,7 @@
 	import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
 	import { getDateRangeAround, getMonth } from '$lib/utils/dates';
 
-	const date = new Date();
+	const date = new Date(2026, 0, 26);
 	const dateList = getDateRangeAround(date);
 
 	onMount(() => {
