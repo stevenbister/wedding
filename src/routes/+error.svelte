@@ -45,8 +45,6 @@
 	<SuitAndDress />
 
 	<p class="ta-center space-top-2">This page does not exist or has been removed</p>
-
-	<button class="btn space-top-1">Go back</button>
 </div>
 
 <style>
