@@ -3,9 +3,9 @@
 	import Lily2 from '$lib/illustrations/lily-2.svelte';
 	import Header from '$/lib/components/header.svelte';
 	import favicon from '$lib/assets/favicon.svg';
+	import Footer from '$/lib/components/footer.svelte';
 
 	import '$styles/main.css';
-	import Footer from '$/lib/components/footer.svelte';
 
 	let { children } = $props();
 </script>
