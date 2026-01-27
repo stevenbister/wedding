@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Lily1 from '$lib/illustrations/lily-1.svelte';
 	import Lily2 from '$lib/illustrations/lily-2.svelte';
-	import Header from '$/lib/components/header.svelte';
 	import favicon from '$lib/assets/favicon.svg';
 	import Footer from '$/lib/components/footer.svelte';
 
@@ -16,7 +15,6 @@
 
 <Lily1 />
 <Lily2 />
-<Header />
 
 <main>
 	{@render children()}
@@ -35,10 +33,10 @@
 	}
 
 	:global(.lily-1) {
-		top: -60px;
-		left: -55px;
+		top: -40px;
+		left: -75px;
 
-		@media (min-width: 48rem) {
+		@media (min-width: 36rem) {
 			top: -90px;
 			left: -30px;
 		}
@@ -53,7 +51,7 @@
 		top: -36px;
 		right: -46px;
 
-		@media (min-width: 48rem) {
+		@media (min-width: 36rem) {
 			top: -95px;
 			right: -95px;
 		}
