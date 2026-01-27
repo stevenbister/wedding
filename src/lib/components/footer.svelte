@@ -1,7 +1,29 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
+
 	import { page } from '$app/state';
 	import Flower1 from '../illustrations/flower-1.svelte';
 	import DressSaveTheDate from '$lib/illustrations/dress-save-date.svelte';
+	import { animations } from '$/constants/animations';
+
+	onMount(() => {
+		const tl = gsap.timeline({
+			defaults: {
+				duration: animations.drawDuration,
+				ease: animations.ease
+			},
+			scrollTrigger: {
+				trigger: 'footer',
+				start: 'center bottom',
+				once: true
+			}
+		});
+
+		tl.from(['.flower-1 path', '.footer-illustration path'], {
+			drawSVG: 0
+		});
+	});
 </script>
 
 <footer>
