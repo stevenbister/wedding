@@ -1,8 +1,37 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
+
 	import SaveTheDate from '$lib/components/save-the-date.svelte';
 	import Date from '$lib/components/date.svelte';
 	import { buildMetaTitle } from '$/lib/utils/meta';
 	import { content } from '$/constants/content';
+	import { animations } from '$/constants/animations';
+
+	onMount(() => {
+		const tl = gsap.timeline({
+			defaults: {
+				duration: 1.5,
+				ease: animations.ease
+			}
+		});
+
+		tl.from(['.lily-1 path', '.lily-2 path'], { drawSVG: 0, duration: animations.drawDuration })
+			.from(
+				'article',
+				{
+					opacity: 0
+				},
+				'<'
+			)
+			.from(
+				'#circle path',
+				{
+					drawSVG: 0
+				},
+				'-=3'
+			);
+	});
 </script>
 
 <svelte:head>

@@ -1,16 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
-	import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
 	import { getDateRangeAround, getMonth } from '$lib/utils/dates';
 
 	const date = new Date(2026, 0, 26);
 	const dateList = getDateRangeAround(date);
-
-	onMount(() => {
-		gsap.registerPlugin(DrawSVGPlugin);
-		gsap.from('#circle path', { drawSVG: 0, duration: 1.5, ease: 'power1.inOut' });
-	});
 </script>
 
 <section>
