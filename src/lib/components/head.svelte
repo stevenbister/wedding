@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import favicon from '$lib/assets/favicon.svg';
+	import { buildMetaTitle } from '../utils/meta';
 
 	interface HeadProps {
 		title: string;
@@ -13,12 +14,14 @@
 	}
 
 	let { title, image, description, type = 'article' }: HeadProps = $props();
+
+	const metaTitle = $derived(buildMetaTitle(title));
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>{title}</title>
-	<meta property="og:title" content={title} />
+	<title>{metaTitle}</title>
+	<meta property="og:title" content={metaTitle} />
 	<meta property="og:description" content={description} />
 	<meta property="og:type" content={type} />
 	<meta property="og:image" content={image.src} />

@@ -36,7 +36,7 @@
 </script>
 
 <Head
-	title={buildMetaTitle(content.saveTheDate.title)}
+	title={content.saveTheDate.title}
 	image={{
 		src: '/social/save-the-date.png',
 		alt: 'Save the date'
