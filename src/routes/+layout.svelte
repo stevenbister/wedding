@@ -1,17 +1,12 @@
 <script lang="ts">
 	import Lily1 from '$lib/illustrations/lily-1.svelte';
 	import Lily2 from '$lib/illustrations/lily-2.svelte';
-	import favicon from '$lib/assets/favicon.svg';
 	import Footer from '$/lib/components/footer.svelte';
 
 	import '$styles/main.css';
 
 	let { children } = $props();
 </script>
-
-<svelte:head>
-	<link rel="icon" href={favicon} />
-</svelte:head>
 
 <Lily1 />
 <Lily2 />
