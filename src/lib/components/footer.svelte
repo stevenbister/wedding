@@ -20,9 +20,12 @@
 			}
 		});
 
-		tl.from(['.flower-1 path', '.footer-illustration path'], {
-			drawSVG: 0
-		});
+		tl.set(['.flower-1', '.footer-illustration'], { opacity: 1 }).from(
+			['.flower-1 path', '.footer-illustration path'],
+			{
+				drawSVG: 0
+			}
+		);
 	});
 </script>
 
@@ -77,6 +80,11 @@
 			@media (min-width: 80rem) {
 				--flower-offset: -120px;
 			}
+		}
+
+		:global(.flower-1),
+		:global(.footer-illustration) {
+			opacity: 0;
 		}
 	}
 </style>

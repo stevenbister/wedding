@@ -16,11 +16,14 @@
 			}
 		});
 
-		tl.from(['.lily-1 path', '.lily-2 path'], { drawSVG: 0, duration: animations.drawDuration })
-			.from(
+		tl.set(['.lily-1', '.lily-2', '#circle'], {
+			opacity: 1
+		})
+			.from(['.lily-1 path', '.lily-2 path'], { drawSVG: 0, duration: animations.drawDuration })
+			.to(
 				'article',
 				{
-					opacity: 0
+					opacity: 1
 				},
 				'<'
 			)
@@ -82,5 +85,12 @@
 		.btn {
 			margin-inline: auto;
 		}
+	}
+
+	article,
+	:global(.lily-1),
+	:global(.lily-2),
+	:global(#circle) {
+		opacity: 0;
 	}
 </style>
