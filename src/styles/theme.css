@@ -24,7 +24,7 @@
 
 :where(html) {
 	--surface-light: var(--brown-0);
-	--surface-dark: var(--sand-11);
+	--surface-dark: var(--sand-12);
 
 	--text-light: var(--green-12);
 	--text-dark: var(--green-0);
@@ -36,11 +36,10 @@
 	--text: var(--text-light);
 }
 
-/* TODO: decide how this will look in dark mode - do we want dark mode? */
-/*@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
 	:root {
 		--surface: var(--surface-dark);
 
 		--text: var(--text-dark);
 	}
-}*/
+}
