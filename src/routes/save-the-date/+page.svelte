@@ -5,7 +5,6 @@
 	import SaveTheDate from '$lib/components/save-the-date.svelte';
 	import Date from '$lib/components/date.svelte';
 	import Head from '$/lib/components/head.svelte';
-	import { buildMetaTitle } from '$/lib/utils/meta';
 	import { content } from '$/constants/content';
 	import { animations } from '$/constants/animations';
 
