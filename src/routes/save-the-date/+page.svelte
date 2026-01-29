@@ -4,7 +4,7 @@
 
 	import SaveTheDate from '$lib/components/save-the-date.svelte';
 	import Date from '$lib/components/date.svelte';
-	import { buildMetaTitle } from '$/lib/utils/meta';
+	import Head from '$/lib/components/head.svelte';
 	import { content } from '$/constants/content';
 	import { animations } from '$/constants/animations';
 
@@ -34,9 +34,14 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{buildMetaTitle(content.saveTheDate.title)}</title>
-</svelte:head>
+<Head
+	title={content.saveTheDate.title}
+	image={{
+		src: '/social/save-the-date.png',
+		alt: 'Save the date'
+	}}
+	description={`${content.saveTheDate.ctaSection.heading} ${content.saveTheDate.ctaSection.description}`}
+/>
 
 <article class="container">
 	<SaveTheDate />
