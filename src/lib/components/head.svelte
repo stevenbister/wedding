@@ -14,14 +14,12 @@
 	}
 
 	let { title, image, description, type = 'article' }: HeadProps = $props();
-
-	const metaTitle = $derived(buildMetaTitle(title));
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>{metaTitle}</title>
-	<meta property="og:title" content={metaTitle} />
+	<title>{buildMetaTitle(title)}</title>
+	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:type" content={type} />
 	<meta property="og:image" content={image.src} />
