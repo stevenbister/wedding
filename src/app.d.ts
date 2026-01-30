@@ -1,16 +1,25 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
+
+interface Env {
+	DB: D1Database;
+	ENVIRONMENT: 'development' | 'preview' | 'production';
+}
+
 declare global {
 	namespace App {
 		interface Platform {
 			env: Env;
 			ctx: ExecutionContext;
-			caches: CacheStorage;
+			caches: CacheStorage & { default: Cache };
 			cf?: IncomingRequestCfProperties;
 		}
 
+		interface Locals {
+			db: import('$lib/server/db/connection').DbClient;
+		}
+
 		// interface Error {}
-		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
