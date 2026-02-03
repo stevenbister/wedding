@@ -22,3 +22,6 @@ export const guests = sqliteTable(
 		})
 	]
 );
+
+export type TGuests = typeof guests.$inferSelect;
+export type GuestsInsert = typeof guests.$inferInsert;
