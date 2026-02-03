@@ -1,8 +1,27 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { foreignKey, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-export const user = sqliteTable('user', {
-	id: text('id')
-		.primaryKey()
-		.$defaultFn(() => crypto.randomUUID()),
-	age: integer('age')
-});
+export const guests = sqliteTable(
+	'guests',
+	{
+		id: text()
+			.primaryKey()
+			.$defaultFn(() => crypto.randomUUID()),
+		firstName: text('first_name').notNull(),
+		lastName: text('last_name').notNull(),
+		phoneNumber: text('phone_number').notNull(),
+		rsvp: integer({ mode: 'boolean' }),
+		message: text(),
+		partnerId: text('partner_id'),
+		dietaryRequirements: text('dietary_requirements')
+	},
+	(table) => [
+		foreignKey({
+			columns: [table.partnerId],
+			foreignColumns: [table.id],
+			name: 'custom_fk'
+		})
+	]
+);
+
+export type TGuests = typeof guests.$inferSelect;
+export type GuestsInsert = typeof guests.$inferInsert;

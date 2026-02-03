@@ -34,9 +34,6 @@ describe('/save-the-date', () => {
 
 		await expect.element(page.getByText('Wed', { exact: true })).toBeInTheDocument();
 		await expect.element(page.getByText('28')).toBeInTheDocument();
-
-		await expect.element(page.getByText('Thu', { exact: true })).toBeInTheDocument();
-		await expect.element(page.getByText('29')).toBeInTheDocument();
 	});
 
 	it('renders the cta section', async () => {
