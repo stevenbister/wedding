@@ -3,7 +3,6 @@
 
 interface Env {
 	DB: D1Database;
-	ENVIRONMENT: 'development' | 'preview' | 'production';
 }
 
 declare global {
@@ -16,7 +15,7 @@ declare global {
 		}
 
 		interface Locals {
-			db: import('$lib/server/db/connection').DbClient;
+			db: import('$lib/server/db').DbClient;
 		}
 
 		// interface Error {}
