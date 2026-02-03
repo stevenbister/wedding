@@ -10,10 +10,6 @@ if (!process.env.CLOUDFLARE_D1_TOKEN) {
 	throw new Error('CLOUDFLARE_D1_TOKEN is not set');
 }
 
-const getLocalDB = () => {
-	return process.env.LOCAL_D1_DB;
-};
-
 export default defineConfig({
 	schema: './src/lib/server/db/schema.ts',
 	out: './src/lib/server/db/migrations',
@@ -31,7 +27,7 @@ export default defineConfig({
 			}
 		: {
 				dbCredentials: {
-					url: getLocalDB()
+					url: process.env.LOCAL_D1_DB
 				}
 			})
 });
