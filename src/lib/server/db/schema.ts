@@ -11,7 +11,8 @@ export const guests = sqliteTable(
 		phoneNumber: text('phone_number').notNull(),
 		rsvp: integer({ mode: 'boolean' }),
 		message: text(),
-		partnerId: text('partner_id')
+		partnerId: text('partner_id'),
+		dietaryRequirements: text('dietary_requirements')
 	},
 	(table) => [
 		foreignKey({
