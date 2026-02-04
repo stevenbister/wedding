@@ -4,7 +4,7 @@
 	viewBox="0 0 200 200"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
-	class="suit-and-dress"
+	class="suit-and-dress decorative"
 >
 	<mask id="path-1-inside-1_111_2650" fill="white">
 		<path

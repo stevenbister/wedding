@@ -46,3 +46,7 @@
 	clip-path: inset(100%);
 	white-space: nowrap;
 }
+
+.decorative {
+	pointer-events: none;
+}
