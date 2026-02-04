@@ -5,6 +5,8 @@
 	import { page } from '$app/state';
 	import Flower1 from '../illustrations/flower-1.svelte';
 	import DressSaveTheDate from '$lib/illustrations/dress-save-date.svelte';
+	import Couple from '$lib/illustrations/couple.svelte';
+
 	import { animations } from '$/constants/animations';
 
 	onMount(() => {
@@ -33,7 +35,11 @@
 	<Flower1 />
 
 	{#if !page.error}
-		<DressSaveTheDate class="footer-illustration" />
+		{#if page.route.id === '/(main)'}
+			<Couple class="footer-illustration" />
+		{:else}
+			<DressSaveTheDate class="footer-illustration" />
+		{/if}
 	{/if}
 
 	<Flower1 />
