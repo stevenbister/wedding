@@ -5,6 +5,7 @@
 	import SaveTheDate from '$lib/components/save-the-date.svelte';
 	import Date from '$lib/components/date.svelte';
 	import Head from '$/lib/components/head.svelte';
+	import SaveTheDateButton from '$/lib/components/save-the-date-button.svelte';
 	import { content } from '$/constants/content';
 	import { venue } from '$/constants/venue';
 	import { animations } from '$/constants/animations';
@@ -58,9 +59,7 @@
 		<p class="space-top-3">{content.saveTheDate.ctaSection.description}</p>
 		<p class="space-top-2">{venue.address}</p>
 
-		<a class="btn space-top-7" href="/calendar-invite.ics" download
-			>{content.saveTheDate.ctaSection.cta}</a
-		>
+		<SaveTheDateButton />
 
 		<p class="space-top-7 text-light">
 			{content.noKids}

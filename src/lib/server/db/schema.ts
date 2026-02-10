@@ -1,3 +1,4 @@
+import { sql } from 'drizzle-orm';
 import { foreignKey, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 export const guests = sqliteTable(
@@ -25,3 +26,21 @@ export const guests = sqliteTable(
 
 export type TGuests = typeof guests.$inferSelect;
 export type GuestsInsert = typeof guests.$inferInsert;
+
+export const events = sqliteTable('events', {
+	id: integer('id').primaryKey({ autoIncrement: true }),
+	type: text('type', {
+		enum: ['click']
+	}).notNull(),
+	name: text('name').notNull(),
+	page: text('page'),
+	userAgent: text('user_agent'),
+	referrer: text('referrer'),
+	meta: text('meta', { mode: 'json' }),
+	createdAt: integer('created_at', { mode: 'timestamp_ms' })
+		.default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+		.notNull()
+});
+
+export type TEvents = typeof events.$inferSelect;
+export type EventsInsert = typeof events.$inferInsert;
