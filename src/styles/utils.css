@@ -7,10 +7,14 @@
 	text-align: center;
 }
 
+.text-light {
+	font-weight: var(--font-weight-3);
+}
+
 /* Layout */
 .container {
 	width: min(100%, var(--container-max-width, 1200px));
-	padding-inline: var(--container-padding, var(--size-px-6));
+	padding-inline: var(--container-padding, var(--size-px-4));
 	margin-inline: auto;
 }
 
@@ -28,11 +32,15 @@
 }
 
 /* Spacing */
-.space-top-1 {
+.space-top-2 {
+	margin-block-start: var(--size-px-2);
+}
+
+.space-top-3 {
 	margin-block-start: var(--size-px-3);
 }
 
-.space-top-2 {
+.space-top-7 {
 	margin-block-start: var(--size-px-7);
 }
 

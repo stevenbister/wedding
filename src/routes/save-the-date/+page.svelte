@@ -55,11 +55,16 @@
 	<section class="cta-section">
 		<h2>{content.saveTheDate.ctaSection.heading}</h2>
 
-		<p class="space-top-1">{content.saveTheDate.ctaSection.description}</p>
+		<p class="space-top-3">{content.saveTheDate.ctaSection.description}</p>
+		<p class="space-top-2">{venue.address}</p>
 
-		<a class="btn space-top-2" href="/calendar-invite.ics" download
+		<a class="btn space-top-7" href="/calendar-invite.ics" download
 			>{content.saveTheDate.ctaSection.cta}</a
 		>
+
+		<p class="space-top-7 text-light">
+			{content.noKids}
+		</p>
 	</section>
 </article>
 
@@ -76,11 +81,7 @@
 		}
 
 		p {
-			max-width: 24ch;
-
-			@media (min-width: 48rem) {
-				max-width: 36ch;
-			}
+			max-width: 40ch;
 		}
 
 		.btn {

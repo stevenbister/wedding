@@ -9,7 +9,7 @@
 <section>
 	<p class="ta-center">{getMonthAndYear(date)}</p>
 
-	<div class="grid space-top-1">
+	<div class="grid space-top-3">
 		{#each dateList as date (date.day)}
 			<div class={['flex-col ta-center', date.target && 'target']}>
 				{#if date.target}
