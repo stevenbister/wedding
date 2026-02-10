@@ -43,8 +43,11 @@ describe('/save-the-date', () => {
 			.element(page.getByRole('heading', { level: 2, name: 'Steve & Grace' }))
 			.toBeInTheDocument();
 		await expect
-			.element(page.getByText('Invite you to celebrate their wedding'))
+			.element(page.getByText('Invite you to celebrate their wedding at'))
 			.toBeInTheDocument();
-		await expect.element(page.getByRole('button', { name: 'Save the date' })).toBeInTheDocument();
+		await expect
+			.element(page.getByText('Dodmoor House, Weedon Lane, Dodford, Northamptonshire NN7 4TA'))
+			.toBeInTheDocument();
+		await expect.element(page.getByRole('link', { name: 'Save the date' })).toBeInTheDocument();
 	});
 });

@@ -6,6 +6,7 @@
 	import Date from '$lib/components/date.svelte';
 	import Head from '$/lib/components/head.svelte';
 	import { content } from '$/constants/content';
+	import { venue } from '$/constants/venue';
 	import { animations } from '$/constants/animations';
 
 	onMount(() => {
