@@ -4,7 +4,7 @@
 	viewBox="0 0 279 279"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
-	class="lily-1"
+	class="lily-1 decorative"
 >
 	<mask
 		id="mask1_124_3850"

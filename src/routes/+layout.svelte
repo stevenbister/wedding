@@ -44,7 +44,7 @@
 
 	:global(.lily-2) {
 		top: -36px;
-		right: -46px;
+		right: -60px;
 
 		@media (min-width: 36rem) {
 			top: -95px;
