@@ -11,4 +11,15 @@ const setDB: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
-export const handle = sequence(setDB);
+const setCalendarEventHeaders: Handle = async ({ event, resolve }) => {
+	const response = await resolve(event);
+
+	if (event.url.pathname.endsWith('.ics')) {
+		response.headers.set('Content-Type', 'text/calendar; charset=utf-8');
+		response.headers.set('Content-Disposition', 'attachment; filename="steve-grace-wedding.ics"');
+	}
+
+	return response;
+};
+
+export const handle = sequence(setDB, setCalendarEventHeaders);

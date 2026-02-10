@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getDateRangeAround, getMonth } from '$lib/utils/dates';
 
-	const date = new Date(2026, 0, 26);
+	const date = new Date(2027, 5, 17);
 	const dateList = getDateRangeAround(date);
 </script>
 
