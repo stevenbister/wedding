@@ -1,29 +1,23 @@
-export function getDateRangeAround(targetDate: Date) {
-	const result: { day: string; date: number; target: boolean }[] = [];
+import dayjs from 'dayjs';
 
-	const dayFormatter = new Intl.DateTimeFormat('en-GB', { weekday: 'short' });
+export function getDateRangeAround(targetDate: dayjs.Dayjs) {
+	const result: { day: string; date: string; target: boolean }[] = [];
 
-	// Start from 3 days before the target date
-	const startDate = new Date();
-	startDate.setDate(targetDate.getDate() - 3);
+	const startDate = targetDate.subtract(3, 'day');
 
-	// Generate 7 days total (3 before + target + 3 after)
 	for (let i = 0; i < 7; i++) {
-		const currentDate = new Date(startDate);
-		currentDate.setDate(startDate.getDate() + i);
+		const currentDate = startDate.add(i, 'day');
 
 		result.push({
-			day: dayFormatter.format(currentDate),
-			date: currentDate.getDate(),
-			target: targetDate.getDate() === currentDate.getDate()
+			day: currentDate.format('ddd'),
+			date: currentDate.format('D'),
+			target: currentDate.isSame(targetDate, 'day')
 		});
 	}
 
 	return result;
 }
 
-export function getMonth(date: Date) {
-	const dateFormatter = new Intl.DateTimeFormat('en-GB', { month: 'long' });
-
-	return dateFormatter.format(date);
+export function getMonthAndYear(date: dayjs.Dayjs) {
+	return date.format('MMMM YYYY');
 }

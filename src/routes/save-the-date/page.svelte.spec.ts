@@ -15,25 +15,25 @@ describe('/save-the-date', () => {
 	it('renders the dates to save', async () => {
 		render(Page);
 
-		await expect.element(page.getByText('January')).toBeInTheDocument();
-
-		await expect.element(page.getByText('Fri', { exact: true })).toBeInTheDocument();
-		await expect.element(page.getByText('23')).toBeInTheDocument();
-
-		await expect.element(page.getByText('Sat', { exact: true })).toBeInTheDocument();
-		await expect.element(page.getByText('24')).toBeInTheDocument();
-
-		await expect.element(page.getByText('Sun', { exact: true })).toBeInTheDocument();
-		await expect.element(page.getByText('25')).toBeInTheDocument();
+		await expect.element(page.getByText('June 2027')).toBeInTheDocument();
 
 		await expect.element(page.getByText('Mon', { exact: true })).toBeInTheDocument();
-		await expect.element(page.getByText('26')).toBeInTheDocument();
+		await expect.element(page.getByText('14')).toBeInTheDocument();
 
 		await expect.element(page.getByText('Tue', { exact: true })).toBeInTheDocument();
-		await expect.element(page.getByText('27')).toBeInTheDocument();
+		await expect.element(page.getByText('15')).toBeInTheDocument();
 
 		await expect.element(page.getByText('Wed', { exact: true })).toBeInTheDocument();
-		await expect.element(page.getByText('28')).toBeInTheDocument();
+		await expect.element(page.getByText('16')).toBeInTheDocument();
+
+		await expect.element(page.getByText('Thu', { exact: true })).toBeInTheDocument();
+		await expect.element(page.getByText('17')).toBeInTheDocument();
+
+		await expect.element(page.getByText('Fri', { exact: true })).toBeInTheDocument();
+		await expect.element(page.getByText('18')).toBeInTheDocument();
+
+		await expect.element(page.getByText('Sat', { exact: true })).toBeInTheDocument();
+		await expect.element(page.getByText('19')).toBeInTheDocument();
 	});
 
 	it('renders the cta section', async () => {

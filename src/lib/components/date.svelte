@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { getDateRangeAround, getMonth } from '$lib/utils/dates';
+	import dayjs from 'dayjs';
+	import { getDateRangeAround, getMonthAndYear } from '$lib/utils/dates';
 
-	const date = new Date(2027, 5, 17);
+	const date = dayjs('2027-06-17');
 	const dateList = getDateRangeAround(date);
 </script>
 
 <section>
-	<p class="ta-center">{getMonth(date)}</p>
+	<p class="ta-center">{getMonthAndYear(date)}</p>
 
 	<div class="grid space-top-1">
 		{#each dateList as date (date.day)}
