@@ -17,7 +17,7 @@
 	const visibleNavItems = navItems.filter((item) => flags.inviteReady || !item.requiresInvite);
 </script>
 
-<nav>
+<nav class="navbar">
 	<ul>
 		{#each visibleNavItems as item (item.label)}
 			<li><a href={item.href}>{item.label}</a></li>
@@ -29,6 +29,7 @@
 	nav {
 		margin-block-start: var(--size-px-6);
 		font-weight: var(--font-weight-4);
+		font-size: var(--font-size-3);
 	}
 
 	ul {

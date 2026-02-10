@@ -11,6 +11,7 @@
 	import { animations } from '$/constants/animations';
 
 	onMount(() => {
+		// TODO: Only run this on the first page load. After that, navigation/going back should not run the animations
 		const tl = gsap.timeline({
 			defaults: {
 				duration: 1.5,
@@ -23,7 +24,7 @@
 		})
 			.from(['.lily-1 path', '.lily-2 path'], { drawSVG: 0, duration: animations.drawDuration })
 			.to(
-				'article',
+				['article', '.navbar'],
 				{
 					opacity: 1
 				},
@@ -56,12 +57,12 @@
 	<section class="cta-section">
 		<h2>{content.saveTheDate.ctaSection.heading}</h2>
 
-		<p class="space-top-3">{content.saveTheDate.ctaSection.description}</p>
-		<p class="space-top-2">{venue.address}</p>
+		<p class="space-top-3 text-balance">{content.saveTheDate.ctaSection.description}</p>
+		<p class="space-top-2 text-balance">{venue.address}</p>
 
 		<SaveTheDateButton />
 
-		<p class="space-top-7 text-light">
+		<p class="space-top-7 text-light text-balance">
 			{content.noKids}
 		</p>
 	</section>
@@ -81,14 +82,15 @@
 
 		p {
 			max-width: 40ch;
-		}
 
-		.btn {
-			margin-inline: auto;
+			@media (min-width: 48rem) {
+				max-width: 60ch;
+			}
 		}
 	}
 
 	article,
+	:global(.navbar),
 	:global(.lily-1),
 	:global(.lily-2),
 	:global(#circle) {

@@ -11,6 +11,10 @@
 	font-weight: var(--font-weight-3);
 }
 
+.text-balance {
+	text-wrap: balance;
+}
+
 /* Layout */
 .container {
 	width: min(100%, var(--container-max-width, 1200px));
