@@ -83,15 +83,14 @@
 		height: auto;
 		max-width: 348px;
 		margin-inline: auto;
-		margin-block-start: var(--size-px-7);
+		margin-block-start: 0;
 
 		@media (min-width: 48rem) {
 			max-width: 515px;
-			margin-block-start: 0;
 		}
 
 		@media (min-width: 80rem) {
-			margin-block-start: var(--size-px-10);
+			/*margin-block-start: var(--size-px-10);*/
 		}
 	}
 </style>

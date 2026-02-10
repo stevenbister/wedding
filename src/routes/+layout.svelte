@@ -2,6 +2,7 @@
 	import Lily1 from '$lib/illustrations/lily-1.svelte';
 	import Lily2 from '$lib/illustrations/lily-2.svelte';
 	import Footer from '$/lib/components/footer.svelte';
+	import NavBar from '$lib/components/navbar.svelte';
 
 	import '$styles/main.css';
 
@@ -10,6 +11,8 @@
 
 <Lily1 />
 <Lily2 />
+
+<NavBar />
 
 <main>
 	{@render children()}

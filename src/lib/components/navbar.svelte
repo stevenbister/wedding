@@ -1,34 +1,25 @@
 <script lang="ts">
-	/* eslint svelte/no-navigation-without-resolve: "off" */
-	import { resolve } from '$app/paths';
-	import type { ResolvedPathname } from '$app/types';
+	import { flags } from '$constants/flags';
 
-	const navItems: {
+	type NavItem = {
 		label: string;
-		href: ResolvedPathname;
-	}[] = [
-		{
-			label: 'RSVP',
-			href: resolve('/')
-		},
-		{
-			label: 'Venue',
-			href: resolve('/venue')
-		},
-		{
-			label: 'Schedule',
-			href: resolve('/schedule')
-		},
-		{
-			label: 'Info',
-			href: resolve('/info')
-		}
+		href: string;
+		requiresInvite?: boolean;
+	};
+
+	const navItems: NavItem[] = [
+		{ label: 'RSVP', href: '/', requiresInvite: true },
+		{ label: 'Venue', href: '/venue' },
+		{ label: 'Schedule', href: '/schedule', requiresInvite: true },
+		{ label: 'Info', href: '/info' }
 	];
+
+	const visibleNavItems = navItems.filter((item) => flags.inviteReady || !item.requiresInvite);
 </script>
 
 <nav>
 	<ul>
-		{#each navItems as item (item.label)}
+		{#each visibleNavItems as item (item.label)}
 			<li><a href={item.href}>{item.label}</a></li>
 		{/each}
 	</ul>
@@ -36,7 +27,7 @@
 
 <style>
 	nav {
-		margin-block-start: var(--size-px-8);
+		margin-block-start: var(--size-px-6);
 		font-weight: var(--font-weight-4);
 	}
 
