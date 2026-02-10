@@ -7,6 +7,7 @@
 	import Head from '$/lib/components/head.svelte';
 	import { content } from '$/constants/content';
 	import { animations } from '$/constants/animations';
+	import { downloadICS } from '$/lib/utils/download-ics';
 
 	onMount(() => {
 		const tl = gsap.timeline({
@@ -56,7 +57,7 @@
 
 		<p class="space-top-1">{content.saveTheDate.ctaSection.description}</p>
 
-		<button class="btn space-top-2" onclick={(e) => console.log(e)}
+		<button class="btn space-top-2" onclick={() => downloadICS('event.ics', '/calendar-invite.ics')}
 			>{content.saveTheDate.ctaSection.cta}</button
 		>
 	</section>
