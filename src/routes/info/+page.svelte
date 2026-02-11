@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { content } from '$/constants/content';
 	import Head from '$/lib/components/head.svelte';
+	import Accordion from '$/lib/components/accordion.svelte';
 
 	// TODO: Need to add img & desc to the Head
 </script>
@@ -14,7 +15,11 @@
 	description=""
 />
 
-<h1>{content.info.title}</h1>
+<article class="container">
+	<h1>{content.info.title}</h1>
+
+	<Accordion name="info" items={content.info.faqs} />
+</article>
 
 <style>
 	h1 {
