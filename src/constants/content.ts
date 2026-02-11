@@ -1,6 +1,5 @@
 export const content = {
-	noKids:
-		'To allow us and our guests to relax and enjoy the celebration, we have chosen to make this an adults-only wedding',
+	noKids: 'We can’t wait to celebrate with you all. Adults only, please.',
 	saveTheDate: {
 		title: 'Save the date',
 		ctaSection: {

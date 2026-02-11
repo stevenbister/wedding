@@ -4,7 +4,7 @@
 </script>
 
 <a
-	class="btn space-top-7"
+	class="btn"
 	href="/calendar-invite.ics"
 	download
 	onclick={() => {
@@ -15,3 +15,9 @@
 >
 	{content.saveTheDate.ctaSection.cta}
 </a>
+
+<style>
+	.btn {
+		margin-block: var(--size-2);
+	}
+</style>

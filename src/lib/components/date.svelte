@@ -29,7 +29,7 @@
 					</svg>
 				{/if}
 				<span class="cursive">{date.day}</span>
-				<span>{date.date}</span>
+				<span class="text-light">{date.date}</span>
 			</div>
 		{/each}
 	</div>

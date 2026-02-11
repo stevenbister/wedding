@@ -9,6 +9,7 @@
 	import { content } from '$/constants/content';
 	import { venue } from '$/constants/venue';
 	import { animations } from '$/constants/animations';
+	import Callout from '$/lib/components/callout.svelte';
 
 	onMount(() => {
 		// TODO: Only run this on the first page load. After that, navigation/going back should not run the animations
@@ -57,14 +58,14 @@
 	<section class="cta-section">
 		<h2>{content.saveTheDate.ctaSection.heading}</h2>
 
-		<p class="space-top-3 text-balance">{content.saveTheDate.ctaSection.description}</p>
-		<p class="space-top-2 text-balance">{venue.address}</p>
+		<div class="text-box">
+			<p class="text-balance">{content.saveTheDate.ctaSection.description}</p>
+			<p class="text-balance">{venue.address}</p>
+		</div>
 
 		<SaveTheDateButton />
 
-		<p class="space-top-7 text-light text-balance">
-			{content.noKids}
-		</p>
+		<Callout description={content.noKids} />
 	</section>
 </article>
 
@@ -73,6 +74,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: var(--size-4);
 		text-align: center;
 		margin-block-start: var(--size-px-7);
 
@@ -87,6 +89,13 @@
 				max-width: 60ch;
 			}
 		}
+	}
+
+	.text-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--size-1);
 	}
 
 	article,
