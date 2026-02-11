@@ -1,44 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
-
 	import SaveTheDate from '$lib/components/save-the-date.svelte';
 	import Date from '$lib/components/date.svelte';
 	import Head from '$/lib/components/head.svelte';
 	import SaveTheDateButton from '$/lib/components/save-the-date-button.svelte';
 	import { content } from '$/constants/content';
 	import { venue } from '$/constants/venue';
-	import { animations } from '$/constants/animations';
 	import Callout from '$/lib/components/callout.svelte';
-
-	onMount(() => {
-		// TODO: Only run this on the first page load. After that, navigation/going back should not run the animations
-		const tl = gsap.timeline({
-			defaults: {
-				duration: 1.5,
-				ease: animations.ease
-			}
-		});
-
-		tl.set(['.lily-1', '.lily-2', '#circle'], {
-			opacity: 1
-		})
-			.from(['.lily-1 path', '.lily-2 path'], { drawSVG: 0, duration: animations.drawDuration })
-			.to(
-				['article', '.navbar'],
-				{
-					opacity: 1
-				},
-				'<'
-			)
-			.from(
-				'#circle path',
-				{
-					drawSVG: 0
-				},
-				'-=3'
-			);
-	});
 </script>
 
 <Head
@@ -77,9 +44,10 @@
 		gap: var(--size-4);
 		text-align: center;
 		margin-block-start: var(--size-px-7);
+		font-weight: var(--font-weight-3);
 
 		@media (min-width: 48rem) {
-			margin-block-start: var(--size-px-10);
+			margin-block-start: var(--size-px-7);
 		}
 
 		p {
@@ -96,13 +64,5 @@
 		flex-direction: column;
 		align-items: center;
 		gap: var(--size-1);
-	}
-
-	article,
-	:global(.navbar),
-	:global(.lily-1),
-	:global(.lily-2),
-	:global(#circle) {
-		opacity: 0;
 	}
 </style>

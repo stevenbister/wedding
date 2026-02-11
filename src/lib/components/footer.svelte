@@ -1,44 +1,25 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
-
 	import { page } from '$app/state';
-	import Flower1 from '../illustrations/flower-1.svelte';
+
+	import Flower1 from '$lib/illustrations/flower-1.svelte';
 	import DressSaveTheDate from '$lib/illustrations/dress-save-date.svelte';
 	import Couple from '$lib/illustrations/couple.svelte';
-
-	import { animations } from '$/constants/animations';
-
-	onMount(() => {
-		const tl = gsap.timeline({
-			defaults: {
-				duration: animations.drawDuration,
-				ease: animations.ease
-			},
-			scrollTrigger: {
-				trigger: 'footer',
-				start: 'center bottom',
-				once: true
-			}
-		});
-
-		tl.set(['.flower-1', '.footer-illustration'], { opacity: 1 }).from(
-			['.flower-1 path', '.footer-illustration path'],
-			{
-				drawSVG: 0
-			}
-		);
-	});
+	import Groomsmen from '$lib/illustrations/groomsmen.svelte';
+	import Cheers from '$lib/illustrations/cheers.svelte';
 </script>
 
 <footer>
 	<Flower1 />
 
 	{#if !page.error}
-		{#if page.route.id === '/(main)'}
-			<Couple class="footer-illustration" />
+		{#if page.route.id === '/'}
+			<Couple />
+		{:else if page.route.id === '/venue'}
+			<Cheers />
+		{:else if page.route.id === '/info'}
+			<Groomsmen />
 		{:else}
-			<DressSaveTheDate class="footer-illustration" />
+			<DressSaveTheDate />
 		{/if}
 	{/if}
 
@@ -86,11 +67,6 @@
 			@media (min-width: 80rem) {
 				--flower-offset: -120px;
 			}
-		}
-
-		:global(.flower-1),
-		:global(.footer-illustration) {
-			opacity: 0;
 		}
 	}
 </style>

@@ -20,6 +20,10 @@
 	width: min(100%, var(--container-max-width, 1200px));
 	padding-inline: var(--container-padding, var(--size-px-4));
 	margin-inline: auto;
+
+	&.narrow {
+		--container-max-width: 600px;
+	}
 }
 
 .flex {
