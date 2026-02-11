@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { content } from '$/constants/content';
 	import Head from '$/lib/components/head.svelte';
-
-	// TODO: Need to add img & desc to the Head
 </script>
 
 <Head
-	title={content.venue.title}
+	title={content.info.title}
 	image={{
-		src: '/social/save-the-date.png',
-		alt: 'Save the date'
+		src: '/social/steve-and-grace-get-married.png',
+		alt: content.rsvp.title
 	}}
-	description=""
+	description={content.social}
 />
 
 <h1>{content.venue.title}</h1>

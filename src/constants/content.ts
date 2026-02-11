@@ -30,5 +30,6 @@ export const content = {
 	},
 	venue: {
 		title: 'Venue'
-	}
+	},
+	social: 'Steve & Grace invite you to celebrate their wedding'
 };

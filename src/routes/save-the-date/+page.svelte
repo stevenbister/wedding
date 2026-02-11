@@ -45,9 +45,9 @@
 	title={content.saveTheDate.title}
 	image={{
 		src: '/social/save-the-date.png',
-		alt: 'Save the date'
+		alt: content.saveTheDate.title
 	}}
-	description={`${content.saveTheDate.ctaSection.heading} ${content.saveTheDate.ctaSection.description}`}
+	description={content.social}
 />
 
 <article class="container">
