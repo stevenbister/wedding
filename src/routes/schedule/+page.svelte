@@ -4,7 +4,7 @@
 </script>
 
 <Head
-	title={content.info.title}
+	title={content.schedule.title}
 	image={{
 		src: '/social/steve-and-grace-get-married.png',
 		alt: content.rsvp.title
