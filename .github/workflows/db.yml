@@ -1,4 +1,4 @@
-name: Database migration
+name: Migrate DB
 
 on:
   workflow_dispatch:
@@ -9,13 +9,14 @@ jobs:
   migrate:
     runs-on: ubuntu-latest
     steps:
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
         with:
-          version: 9
-
-      - name: Checkout
-        uses: actions/checkout@v4
+          version: 10
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
@@ -23,6 +24,7 @@ jobs:
       - name: Migrate DB
         run: pnpm db:migrate
         env:
+          NODE_ENV: 'production'
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_DATABASE_ID: ${{ secrets.CLOUDFLARE_DATABASE_ID }}
           CLOUDFLARE_D1_TOKEN: ${{ secrets.CLOUDFLARE_D1_TOKEN }}
