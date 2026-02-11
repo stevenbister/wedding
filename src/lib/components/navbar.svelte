@@ -8,6 +8,7 @@
 	};
 
 	const navItems: NavItem[] = [
+		{ label: 'Save the date', href: '/save-the-date' },
 		{ label: 'RSVP', href: '/', requiresInvite: true },
 		{ label: 'Venue', href: '/venue' },
 		{ label: 'Schedule', href: '/schedule', requiresInvite: true },
@@ -27,7 +28,7 @@
 
 <style>
 	nav {
-		margin-block-start: var(--size-px-6);
+		margin-block-start: var(--size-px-7);
 		font-weight: var(--font-weight-4);
 		font-size: var(--font-size-3);
 	}
