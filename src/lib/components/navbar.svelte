@@ -8,11 +8,10 @@
 	};
 
 	const navItems: NavItem[] = [
-		{ label: 'Save the date', href: '/save-the-date' },
 		{ label: 'RSVP', href: '/', requiresInvite: true },
-		{ label: 'Venue', href: '/venue' },
+		{ label: 'Venue', href: '/venue', requiresInvite: true },
 		{ label: 'Schedule', href: '/schedule', requiresInvite: true },
-		{ label: 'Info', href: '/info' }
+		{ label: 'Info', href: '/info', requiresInvite: true }
 	];
 
 	const visibleNavItems = navItems.filter((item) => flags.inviteReady || !item.requiresInvite);
