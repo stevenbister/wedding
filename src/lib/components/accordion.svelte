@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** eslint-disable svelte/no-at-html-tags */
+
 	interface AccordionProps {
 		name?: string;
 		items: {
@@ -16,9 +18,10 @@
 			<summary>
 				{item.title}
 			</summary>
-			<p>
-				{item.content}
-			</p>
+
+			<div>
+				{@html item.content}
+			</div>
 		</details>
 	{/each}
 </div>
@@ -27,6 +30,7 @@
 	.accordion {
 		display: flex;
 		flex-direction: column;
+		width: 100%;
 	}
 
 	details {
@@ -48,8 +52,12 @@
 			content: var(--minus-icon);
 		}
 
-		&[open] p {
+		&[open] div {
 			animation: fade-in 0.2s linear;
+		}
+
+		& :global(div > p + p) {
+			margin-block-start: var(--size-3);
 		}
 
 		@media (prefers-color-scheme: dark) {
@@ -66,9 +74,10 @@
 		align-items: center;
 		justify-content: space-between;
 		padding-block: var(--size-4);
+		font-weight: var(--font-weight-4);
 	}
 
-	p {
+	div {
 		padding-block-end: var(--size-4);
 		font-weight: var(--font-weight-3);
 	}
