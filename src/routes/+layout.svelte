@@ -21,10 +21,10 @@
 			}
 		});
 
-		tl.set(['.lily-1', '.lily-2', '#circle'], {
+		tl.set(['.draw', '#circle'], {
 			opacity: 1
 		})
-			.from(['.lily-1 path', '.lily-2 path'], { drawSVG: 0, duration: animations.drawDuration })
+			.from(['.draw path'], { drawSVG: 0, duration: animations.drawDuration })
 			.to(
 				['main', '.navbar'],
 				{
@@ -90,8 +90,7 @@
 
 	main,
 	:global(.navbar),
-	:global(.lily-1),
-	:global(.lily-2) {
+	:global(.draw) {
 		opacity: 0;
 	}
 </style>
