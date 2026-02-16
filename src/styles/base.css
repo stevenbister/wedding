@@ -9,8 +9,8 @@ body {
 	background-color: var(--surface);
 	color: var(--text);
 	font-family: 'Source Serif', serif;
-	font-weight: var(--font-weight-3);
-	font-size: var(--font-size-3);
+	font-weight: var(--font-weight-4);
+	font-size: var(--font-size-2);
 	display: flex;
 	flex-direction: column;
 }

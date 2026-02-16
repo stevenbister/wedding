@@ -1,15 +1,51 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
+
 	import Lily1 from '$lib/illustrations/lily-1.svelte';
 	import Lily2 from '$lib/illustrations/lily-2.svelte';
 	import Footer from '$/lib/components/footer.svelte';
+	import NavBar from '$lib/components/navbar.svelte';
+
+	import { animations } from '$/constants/animations';
 
 	import '$styles/main.css';
 
 	let { children } = $props();
+
+	onMount(() => {
+		const tl = gsap.timeline({
+			defaults: {
+				duration: 1.5,
+				ease: animations.ease
+			}
+		});
+
+		tl.set(['.draw', '#circle'], {
+			opacity: 1
+		})
+			.from(['.draw path'], { drawSVG: 0, duration: animations.drawDuration })
+			.to(
+				['main', '.navbar'],
+				{
+					opacity: 1
+				},
+				'<'
+			)
+			.from(
+				'#circle path',
+				{
+					drawSVG: 0
+				},
+				'-=3'
+			);
+	});
 </script>
 
 <Lily1 />
 <Lily2 />
+
+<NavBar />
 
 <main>
 	{@render children()}
@@ -50,5 +86,11 @@
 			top: -95px;
 			right: -95px;
 		}
+	}
+
+	main,
+	:global(.navbar),
+	:global(.draw) {
+		opacity: 0;
 	}
 </style>

@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { getDateRangeAround, getMonth } from '$lib/utils/dates';
+	import dayjs from 'dayjs';
+	import { getDateRangeAround, getMonthAndYear } from '$lib/utils/dates';
 
-	const date = new Date(2026, 0, 26);
+	const date = dayjs('2027-06-17');
 	const dateList = getDateRangeAround(date);
 </script>
 
 <section>
-	<p class="ta-center">{getMonth(date)}</p>
+	<p class="ta-center">{getMonthAndYear(date)}</p>
 
-	<div class="grid space-top-1">
+	<div class="grid space-top-3">
 		{#each dateList as date (date.day)}
 			<div class={['flex-col ta-center', date.target && 'target']}>
 				{#if date.target}
@@ -28,7 +29,7 @@
 					</svg>
 				{/if}
 				<span class="cursive">{date.day}</span>
-				<span>{date.date}</span>
+				<span class="text-light">{date.date}</span>
 			</div>
 		{/each}
 	</div>

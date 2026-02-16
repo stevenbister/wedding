@@ -4,7 +4,7 @@
 	viewBox="0 0 201 201"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
-	class="flower-1 decorative"
+	class="flower-1 decorative draw"
 >
 	<g clip-path="url(#clip0_111_2641)">
 		<mask id="path-1-inside-1_111_2641" fill="white">

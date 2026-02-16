@@ -1,49 +1,20 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
-
 	import SaveTheDate from '$lib/components/save-the-date.svelte';
 	import Date from '$lib/components/date.svelte';
 	import Head from '$/lib/components/head.svelte';
+	import SaveTheDateButton from '$/lib/components/save-the-date-button.svelte';
 	import { content } from '$/constants/content';
-	import { animations } from '$/constants/animations';
-
-	onMount(() => {
-		const tl = gsap.timeline({
-			defaults: {
-				duration: 1.5,
-				ease: animations.ease
-			}
-		});
-
-		tl.set(['.lily-1', '.lily-2', '#circle'], {
-			opacity: 1
-		})
-			.from(['.lily-1 path', '.lily-2 path'], { drawSVG: 0, duration: animations.drawDuration })
-			.to(
-				'article',
-				{
-					opacity: 1
-				},
-				'<'
-			)
-			.from(
-				'#circle path',
-				{
-					drawSVG: 0
-				},
-				'-=3'
-			);
-	});
+	import { venue } from '$/constants/venue';
+	import Callout from '$/lib/components/callout.svelte';
 </script>
 
 <Head
 	title={content.saveTheDate.title}
 	image={{
 		src: '/social/save-the-date.png',
-		alt: 'Save the date'
+		alt: content.saveTheDate.title
 	}}
-	description={`${content.saveTheDate.ctaSection.heading} ${content.saveTheDate.ctaSection.description}`}
+	description={content.social}
 />
 
 <article class="container">
@@ -54,11 +25,14 @@
 	<section class="cta-section">
 		<h2>{content.saveTheDate.ctaSection.heading}</h2>
 
-		<p class="space-top-1">{content.saveTheDate.ctaSection.description}</p>
+		<div class="text-box">
+			<p class="text-balance">{content.saveTheDate.ctaSection.description}</p>
+			<p class="text-balance">{venue.address}</p>
+		</div>
 
-		<button class="btn space-top-2" onclick={(e) => console.log(e)}
-			>{content.saveTheDate.ctaSection.cta}</button
-		>
+		<SaveTheDateButton />
+
+		<Callout description={content.noKids} />
 	</section>
 </article>
 
@@ -67,30 +41,28 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: var(--size-4);
 		text-align: center;
 		margin-block-start: var(--size-px-7);
+		font-weight: var(--font-weight-3);
 
 		@media (min-width: 48rem) {
-			margin-block-start: var(--size-px-10);
+			margin-block-start: var(--size-px-7);
 		}
 
 		p {
-			max-width: 24ch;
+			max-width: 40ch;
 
 			@media (min-width: 48rem) {
-				max-width: 36ch;
+				max-width: 60ch;
 			}
-		}
-
-		.btn {
-			margin-inline: auto;
 		}
 	}
 
-	article,
-	:global(.lily-1),
-	:global(.lily-2),
-	:global(#circle) {
-		opacity: 0;
+	.text-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--size-1);
 	}
 </style>
