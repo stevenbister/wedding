@@ -32,7 +32,8 @@ export default defineConfig(
 					ignorePushState: false,
 					ignoreReplaceState: false
 				}
-			]
+			],
+			'svelte/no-at-html-tags': 'off'
 		}
 	},
 	{

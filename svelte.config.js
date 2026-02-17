@@ -8,6 +8,15 @@ const config = {
 			$: 'src',
 			$styles: 'src/styles',
 			$constants: 'src/constants'
+		},
+		csp: {
+			directives: {
+				'script-src': ['self']
+			},
+			reportOnly: {
+				'script-src': ['self'],
+				'report-uri': ['/']
+			}
 		}
 	}
 };

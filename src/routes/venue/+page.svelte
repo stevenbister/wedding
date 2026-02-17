@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { content } from '$/constants/content';
 	import { venue } from '$/constants/venue';
+	import Accordion from '$/lib/components/accordion.svelte';
+	import Callout from '$/lib/components/callout.svelte';
 
 	import Head from '$/lib/components/head.svelte';
+	import { kebab } from '$/lib/utils/kebab';
 </script>
 
 <Head
@@ -26,9 +29,24 @@
 			width="600"
 			height="450"
 			style="border:0;"
-			loading="lazy"
+			loading="eager"
 			referrerpolicy="no-referrer-when-downgrade"
 		></iframe>
+
+		<Callout description={content.venue.callout} />
+
+		{#each content.venue.sections as section (section.title)}
+			<section aria-labelledby={kebab(section.title)}>
+				<h2 id={kebab(section.title)}>{section.title}</h2>
+				{#if section.description}
+					<p class="text-light">{@html section.description}</p>
+				{/if}
+
+				{#if section.directions}
+					<Accordion name={kebab(section.title)} items={section.directions} />
+				{/if}
+			</section>
+		{/each}
 	</div>
 </article>
 
@@ -38,11 +56,25 @@
 		margin-block: var(--size-px-4);
 	}
 
+	h2 {
+		font-family: 'Source Serif', serif;
+		font-size: var(--font-size-3);
+		text-wrap: wrap;
+	}
+
 	div {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--size-4);
+	}
+
+	section {
+		width: 100%;
+
+		> p {
+			margin-block-start: var(--size-4);
+		}
 	}
 
 	iframe {

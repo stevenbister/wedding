@@ -64,7 +64,7 @@
 		}
 
 		@media (min-width: 80rem) {
-			--size: 450px;
+			--size: 380px;
 		}
 	}
 </style>

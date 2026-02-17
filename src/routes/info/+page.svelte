@@ -2,6 +2,13 @@
 	import { content } from '$/constants/content';
 	import Head from '$/lib/components/head.svelte';
 	import Accordion from '$/lib/components/accordion.svelte';
+	import { kebab } from '$/lib/utils/kebab';
+	import Car from '$/lib/illustrations/car.svelte';
+	import Checklist from '$/lib/illustrations/checklist.svelte';
+	import Groomsmen from '$/lib/illustrations/groomsmen.svelte';
+	import Cheers from '$/lib/illustrations/cheers.svelte';
+	import Gift from '$/lib/illustrations/gift.svelte';
+	import SuitAndDress from '$/lib/illustrations/suit-and-dress.svelte';
 </script>
 
 <Head
@@ -16,12 +23,62 @@
 <article class="container narrow">
 	<h1>{content.info.title}</h1>
 
-	<Accordion name="info" items={content.info.faqs} />
+	{#each content.info.sections as section (section.title)}
+		<section id={`${kebab(section.title)}-section`} aria-labelledby={kebab(section.title)}>
+			<div>
+				{#if section.icon}
+					{@render icon(section.icon)}
+				{/if}
+				<h2 id={kebab(section.title)}>{section.title}</h2>
+			</div>
+
+			<Accordion name={kebab(section.title)} items={section.info} />
+		</section>
+	{/each}
 </article>
+
+{#snippet icon(name: string)}
+	{#if name === 'car'}
+		<Car />
+	{:else if name === 'checklist'}
+		<Checklist />
+	{:else if name === 'groomsmen'}
+		<Groomsmen />
+	{:else if name === 'cheers'}
+		<Cheers />
+	{:else if name === 'gift'}
+		<Gift />
+	{:else if name === 'suit-and-dress'}
+		<SuitAndDress />
+	{/if}
+{/snippet}
 
 <style>
 	h1 {
 		text-align: center;
 		margin-block-start: var(--size-px-4);
+	}
+
+	h2 {
+		font-family: 'Source Serif', serif;
+		font-size: var(--font-size-3);
+		text-align: center;
+		max-width: 20ch;
+	}
+
+	section {
+		margin-block-start: var(--size-px-4);
+	}
+
+	div {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: var(--size-px-2);
+
+		:global(svg) {
+			width: var(--size-px-10);
+			height: auto;
+		}
 	}
 </style>
