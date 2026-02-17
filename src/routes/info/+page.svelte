@@ -3,7 +3,6 @@
 	import Head from '$/lib/components/head.svelte';
 	import Accordion from '$/lib/components/accordion.svelte';
 	import { kebab } from '$/lib/utils/kebab';
-
 	import Car from '$/lib/illustrations/car.svelte';
 	import Checklist from '$/lib/illustrations/checklist.svelte';
 	import Groomsmen from '$/lib/illustrations/groomsmen.svelte';
@@ -63,8 +62,8 @@
 	h2 {
 		font-family: 'Source Serif', serif;
 		font-size: var(--font-size-3);
-		text-wrap: wrap;
 		text-align: center;
+		max-width: 20ch;
 	}
 
 	section {
