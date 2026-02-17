@@ -37,7 +37,7 @@ export const content = {
 					{
 						title: 'How and when to RSVP?',
 						content:
-							'<p>You can RSVP online here ____  or by emailing steveandgracegetmarried@gmail.com</p><p>Please RSVP by _____</p>'
+							'<p>You can RSVP online here ____  or by emailing <a href="mailto:steveandgracegetmarried@gmail.com">steveandgracegetmarried@gmail.com</a></p><p>Please RSVP by _____</p>'
 					},
 					{
 						title: 'What’s the dress code / Should I bring anything?',
