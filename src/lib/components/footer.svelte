@@ -31,8 +31,15 @@
 		position: relative;
 		display: flex;
 		justify-content: center;
-		min-height: var(--size-px-12);
 		padding-block: var(--size-px-7);
+
+		@media (min-width: 48rem) {
+			padding-block-start: var(--size-px-10);
+		}
+
+		@media (min-width: 80rem) {
+			padding-block-start: var(--size-px-12);
+		}
 
 		:global(.footer-illustration) {
 			--size: 150px;
@@ -49,7 +56,7 @@
 			--flower-offset: -76px;
 
 			position: absolute;
-			top: 0;
+			bottom: 0;
 
 			&:first-child {
 				left: var(--flower-offset);
