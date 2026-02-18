@@ -23,11 +23,11 @@
 }
 
 :where(html) {
-	--surface-light: var(--brown-0);
+	--surface-light: var(--stone-0);
 	--surface-dark: var(--sand-12);
 
 	--text-light: var(--green-12);
-	--text-dark: var(--green-0);
+	--text-dark: var(--stone-0);
 }
 
 :root {

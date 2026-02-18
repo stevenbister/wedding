@@ -27,7 +27,7 @@
 
 		<div class="text-box">
 			<p class="text-balance">{content.saveTheDate.ctaSection.description}</p>
-			<p class="text-balance">{venue.address}</p>
+			<p class="text-balance text-regular">{venue.address}</p>
 		</div>
 
 		<SaveTheDateButton />
