@@ -11,6 +11,10 @@
 	font-weight: var(--font-weight-3);
 }
 
+.text-regular {
+	font-weight: var(--font-weight-4);
+}
+
 .text-balance {
 	text-wrap: balance;
 }
