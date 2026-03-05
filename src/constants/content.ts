@@ -11,7 +11,13 @@ export const content = {
 		}
 	},
 	rsvp: {
-		title: 'Steve & Grace Get Married!'
+		title: 'Steve & Grace Get Married!',
+		formResponse: {
+			rsvp_true:
+				'We can’t wait to share our day with you. If anything changes and you can’t make it; just come back here and change your response or just let Steve and Grace know.',
+			rsvp_false:
+				'Sorry we can’t share our day with you. If anything changes and you can make it; just come back here and change your response or just let Steve and Grace know.'
+		}
 	},
 	info: {
 		title: 'Info',

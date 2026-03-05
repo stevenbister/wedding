@@ -1,0 +1,108 @@
+<script lang="ts">
+	import { enhance } from '$app/forms';
+	import { content } from '$constants/content';
+	import { fade } from 'svelte/transition';
+	import type { TGuests } from '../server/db/schema';
+	import type { ActionData } from '../../routes/rsvp/[guestId]/$types';
+	import DietaryRequirements from './rsvp-form-controls/dietary-requirements.svelte';
+	import ToggleButtons from './rsvp-form-controls/toggle-buttons.svelte';
+	import { getRSVPResponseFromForm, type RSVPResponse } from '../utils/rsvp-helpers';
+	import Celebrate from '../illustrations/celebrate.svelte';
+	import Chairs from '../illustrations/chairs.svelte';
+
+	interface Props {
+		guest: {
+			guest: TGuests;
+			partner: TGuests | null;
+		};
+		form: ActionData;
+	}
+
+	let { guest, form }: Props = $props();
+
+	const response = $derived(getRSVPResponseFromForm(form?.guestResponses ?? []));
+</script>
+
+{#if response === 'all_true'}
+	{@render responseMessage(response, content.rsvp.formResponse.rsvp_true)}
+{:else if response === 'some_true'}
+	{@render responseMessage(response, content.rsvp.formResponse.rsvp_true)}
+{:else if response === 'all_false'}
+	{@render responseMessage(response, content.rsvp.formResponse.rsvp_false)}
+{:else if response === 'no_response'}
+	<form class="form" method="POST" action="?/rsvp" novalidate use:enhance>
+		{#if form?.error}
+			<p class="error" id="error-message" aria-live="polite" transition:fade>{form.message}</p>
+		{/if}
+
+		{@render formFields(guest.guest)}
+
+		{#if guest.partner}
+			{@render formFields(guest.partner)}
+		{/if}
+
+		<div>
+			<label for="message">If want to leave any other message please add it here</label>
+			<textarea name="message" id="message"></textarea>
+		</div>
+
+		<button class="btn">Submit</button>
+	</form>
+{/if}
+
+{#snippet formFields(guest: TGuests)}
+	<fieldset>
+		<legend>
+			{guest.firstName}
+		</legend>
+
+		<ToggleButtons guestId={guest.id} response={guest.rsvp} />
+
+		<DietaryRequirements guestId={guest.id} dietaryRequirements={guest.dietaryRequirements} />
+	</fieldset>
+{/snippet}
+
+{#snippet responseMessage(response: RSVPResponse, message: string)}
+	<div class="response-message">
+		{#if response === 'all_true' || response === 'some_true'}
+			<Celebrate />
+		{:else}
+			<Chairs />
+		{/if}
+
+		<h2>Thank you!</h2>
+
+		<p>{message}</p>
+
+		<a class="btn ghost" href={`/rsvp/${guest.guest.id}`} data-sveltekit-replacestate
+			>Change my response</a
+		>
+	</div>
+{/snippet}
+
+<style>
+	form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--size-px-5);
+	}
+
+	fieldset {
+		align-self: stretch;
+	}
+
+	div {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-px-2);
+	}
+
+	.response-message {
+		margin-inline: auto;
+		align-items: center;
+		text-align: center;
+		gap: var(--size-px-3);
+		max-width: 70ch;
+	}
+</style>

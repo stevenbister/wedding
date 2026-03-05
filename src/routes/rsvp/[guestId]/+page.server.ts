@@ -1,0 +1,63 @@
+import { dev } from '$app/environment';
+import type { Actions, PageServerLoad } from './$types';
+import { error, fail, redirect } from '@sveltejs/kit';
+import { flags } from '$constants/flags';
+import { Guests } from '$lib/server/queries/Guests';
+import { parseRsvpFormData } from '$/lib/utils/rsvp-helpers';
+
+export const load: PageServerLoad = async ({ params }) => {
+	if (!flags.inviteReady && !dev) {
+		redirect(307, '/save-the-date');
+	}
+
+	const guestId = params.guestId;
+
+	if (!guestId) {
+		return error(404);
+	}
+
+	const guests = new Guests();
+	const guest = await guests.getById(guestId);
+	const partner = guest.partnerId ? await guests.getPartner(guestId) : null;
+
+	return {
+		guest,
+		partner
+	};
+};
+
+export const actions = {
+	rsvp: async ({ request }) => {
+		const formData = await request.formData();
+		const parsedData = parseRsvpFormData(formData);
+
+		if (Object.keys(parsedData.guests).length === 0) {
+			return fail(400, {
+				error: true,
+				message: 'Please RSVP before submitting the form'
+			});
+		}
+
+		const guests = new Guests();
+
+		if (parsedData.message !== undefined) {
+			const [guestId] = Object.keys(parsedData.guests);
+			await guests.addMessage(guestId, parsedData.message);
+		}
+
+		const guestResponses = [];
+
+		for (const [guestId, responseData] of Object.entries(parsedData.guests)) {
+			if (responseData['dietary-requirements']) {
+				await guests.addDietaryRequirements(guestId, responseData['dietary-requirements']);
+			}
+			const rsvp = await guests.rsvp(guestId, responseData.rsvp ?? null);
+
+			guestResponses.push(rsvp);
+		}
+
+		return {
+			guestResponses
+		};
+	}
+} satisfies Actions;
