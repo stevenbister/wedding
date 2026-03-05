@@ -178,7 +178,7 @@ describe('Guests', () => {
 
 			const result = await guests.rsvp('guest-1', true);
 
-			expect(result).toBe(mockResult);
+			expect(result).toBe(mockResult[0]);
 			expect(mockDb.update).toHaveBeenCalledWith({
 				id: 'id',
 				firstName: 'first_name',
@@ -205,7 +205,7 @@ describe('Guests', () => {
 
 			const result = await guests.rsvp('guest-1', false);
 
-			expect(result).toBe(mockResult);
+			expect(result).toBe(mockResult[0]);
 			expect(mockDb.set).toHaveBeenCalledWith({ rsvp: false });
 		});
 	});
