@@ -14,10 +14,6 @@ declare global {
 			cf?: IncomingRequestCfProperties;
 		}
 
-		interface Locals {
-			db: import('$lib/server/db').DbClient;
-		}
-
 		// interface Error {}
 		// interface PageData {}
 		// interface PageState {}
