@@ -1,12 +1,18 @@
 import { eq } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/sqlite-core';
-import { guests } from '../db/schema';
+import { guests, type TGuests } from '../db/schema';
 import { Database } from '../db';
 
 export class Guests {
 	readonly db = Database.getInstance();
 
-	async getByPhoneNumber(phoneNumber: string) {
+	async getById(guestId: string) {
+		const [result] = await this.db.select().from(guests).where(eq(guests.id, guestId)).limit(1);
+
+		return result;
+	}
+
+	async getByPhoneNumber(phoneNumber: string): Promise<TGuests | null> {
 		const [result] = await this.db
 			.select()
 			.from(guests)
@@ -31,8 +37,8 @@ export class Guests {
 		return row?.partner ?? null;
 	}
 
-	async rsvp(guestId: string, rsvp: boolean) {
-		const result = await this.db
+	async rsvp(guestId: string, rsvp: boolean | null) {
+		const [result] = await this.db
 			.update(guests)
 			.set({ rsvp })
 			.where(eq(guests.id, guestId))
