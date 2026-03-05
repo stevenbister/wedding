@@ -1,11 +1,11 @@
-import { dev } from '$app/environment';
 import type { Actions, PageServerLoad } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
 import { flags } from '$constants/flags';
 import { Guests } from '$lib/server/queries/Guests';
+import { isProd } from '$lib/utils/is-prod';
 
 export const load: PageServerLoad = async () => {
-	if (!flags.inviteReady && !dev) {
+	if (!flags.inviteReady && isProd) {
 		redirect(307, '/save-the-date');
 	}
 };

@@ -1,4 +1,4 @@
-import { dev } from '$app/environment';
+import { isProd } from '$lib/utils/is-prod';
 import type { Actions, PageServerLoad } from './$types';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { flags } from '$constants/flags';
@@ -6,7 +6,7 @@ import { Guests } from '$lib/server/queries/Guests';
 import { parseRsvpFormData } from '$/lib/utils/rsvp-helpers';
 
 export const load: PageServerLoad = async ({ params }) => {
-	if (!flags.inviteReady && !dev) {
+	if (!flags.inviteReady && isProd) {
 		redirect(307, '/save-the-date');
 	}
 
