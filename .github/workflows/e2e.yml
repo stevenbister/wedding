@@ -28,6 +28,12 @@ jobs:
       - name: Install playwright deps
         run: pnpm exec playwright install --with-deps chromium
 
+      - name: Generate local db
+        run: pnpm db:push --force
+
+      - name: Seed local db
+        run: pnpm db:seed
+
       - name: Run Playwright tests
         run: pnpm test:e2e
 
