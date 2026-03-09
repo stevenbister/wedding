@@ -1,15 +1,9 @@
 <script lang="ts">
-	let { id, label, defaultchecked, onchange } = $props();
+	let { name, id, label, defaultchecked, onchange } = $props();
 </script>
 
 <label>
-	<input
-		name={`guests[${id}][has-dietary-requirements]`}
-		id={`guests[${id}][has-dietary-requirements]`}
-		type="checkbox"
-		{onchange}
-		{defaultchecked}
-	/>
+	<input {name} {id} type="checkbox" {onchange} {defaultchecked} />
 
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

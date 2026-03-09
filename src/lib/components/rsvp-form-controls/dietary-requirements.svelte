@@ -8,14 +8,13 @@
 	let isToggled: boolean = $derived(!!dietaryRequirements);
 </script>
 
-<div>
-	<Checkbox
-		id={guestId}
-		onchange={() => (isToggled = !isToggled)}
-		defaultchecked={!!dietaryRequirements}
-		label="I have dietary requirements"
-	/>
-</div>
+<Checkbox
+	id={`guests[${guestId}][has-dietary-requirements]`}
+	name={`guests[${guestId}][has-dietary-requirements]`}
+	onchange={() => (isToggled = !isToggled)}
+	defaultchecked={!!dietaryRequirements}
+	label="I have dietary requirements"
+/>
 
 {#if isToggled}
 	<label for={`guests[${guestId}][dietary-requirements]`}
