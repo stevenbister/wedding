@@ -9,7 +9,7 @@ export const guests = sqliteTable(
 			.$defaultFn(() => crypto.randomUUID()),
 		firstName: text('first_name').notNull(),
 		lastName: text('last_name').notNull(),
-		phoneNumber: text('phone_number').notNull(),
+		phoneNumber: text('phone_number'),
 		rsvp: integer({ mode: 'boolean' }),
 		message: text(),
 		partnerId: text('partner_id'),
