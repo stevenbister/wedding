@@ -17,13 +17,23 @@
 />
 
 {#if isToggled}
-	<label for={`guests[${guestId}][dietary-requirements]`}
-		>Please add your dietary requirements here:</label
-	>
-	<textarea
-		name={`guests[${guestId}][dietary-requirements]`}
-		id={`guests[${guestId}][dietary-requirements]`}
-		defaultvalue={dietaryRequirements ? dietaryRequirements : ''}
-		in:fade
-	></textarea>
+	<div>
+		<label for={`guests[${guestId}][dietary-requirements]`}
+			>Please add your dietary requirements here:</label
+		>
+		<textarea
+			name={`guests[${guestId}][dietary-requirements]`}
+			id={`guests[${guestId}][dietary-requirements]`}
+			defaultvalue={dietaryRequirements ? dietaryRequirements : ''}
+			in:fade
+		></textarea>
+	</div>
 {/if}
+
+<style>
+	div {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-px-2);
+	}
+</style>
