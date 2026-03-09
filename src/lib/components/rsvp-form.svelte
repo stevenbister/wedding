@@ -9,6 +9,7 @@
 	import { getRSVPResponseFromForm, type RSVPResponse } from '../utils/rsvp-helpers';
 	import Celebrate from '../illustrations/celebrate.svelte';
 	import Chairs from '../illustrations/chairs.svelte';
+	import PlusOneForm from './plus-one-form.svelte';
 
 	interface Props {
 		data: {
@@ -39,6 +40,10 @@
 
 		{#if data.partner}
 			{@render formFields(data.partner)}
+		{/if}
+
+		{#if data.guest.canAddPlusOne}
+			<PlusOneForm guest={data.guest} />
 		{/if}
 
 		<div>
