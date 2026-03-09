@@ -20,7 +20,9 @@ vi.mock('../db/schema', () => ({
 		rsvp: 'rsvp',
 		message: 'message',
 		partnerId: 'partner_id',
-		dietaryRequirements: 'dietary_requirements'
+		dietaryRequirements: 'dietary_requirements',
+		canAddPlusOne: 'can_add_plus_one',
+		plusOneOf: 'plus_one_of'
 	}
 }));
 
@@ -40,7 +42,9 @@ const mockGuest: TGuests = {
 	rsvp: true,
 	message: 'Looking forward to it!',
 	partnerId: 'guest-2',
-	dietaryRequirements: 'Vegetarian'
+	dietaryRequirements: 'Vegetarian',
+	canAddPlusOne: false,
+	plusOneOf: null
 };
 
 const mockPartner: TGuests = {
@@ -51,7 +55,9 @@ const mockPartner: TGuests = {
 	rsvp: true,
 	message: null,
 	partnerId: 'guest-1',
-	dietaryRequirements: null
+	dietaryRequirements: null,
+	canAddPlusOne: false,
+	plusOneOf: null
 };
 
 describe('Guests', () => {
@@ -70,7 +76,9 @@ describe('Guests', () => {
 			limit: vi.fn().mockResolvedValue([]),
 			update: vi.fn().mockReturnThis(),
 			set: vi.fn().mockReturnThis(),
-			returning: vi.fn()
+			returning: vi.fn(),
+			insert: vi.fn().mockReturnThis(),
+			values: vi.fn()
 		};
 
 		vi.mocked(Database.getInstance).mockReturnValue(mockDb);
@@ -94,7 +102,9 @@ describe('Guests', () => {
 				rsvp: 'rsvp',
 				message: 'message',
 				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements'
+				dietaryRequirements: 'dietary_requirements',
+				canAddPlusOne: 'can_add_plus_one',
+				plusOneOf: 'plus_one_of'
 			});
 		});
 
@@ -133,7 +143,9 @@ describe('Guests', () => {
 					rsvp: 'rsvp',
 					message: 'message',
 					partnerId: 'partner_id',
-					dietaryRequirements: 'dietary_requirements'
+					dietaryRequirements: 'dietary_requirements',
+					canAddPlusOne: 'can_add_plus_one',
+					plusOneOf: 'plus_one_of'
 				},
 				'partner'
 			);
@@ -187,7 +199,9 @@ describe('Guests', () => {
 				rsvp: 'rsvp',
 				message: 'message',
 				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements'
+				dietaryRequirements: 'dietary_requirements',
+				canAddPlusOne: 'can_add_plus_one',
+				plusOneOf: 'plus_one_of'
 			});
 			expect(mockDb.set).toHaveBeenCalledWith({ rsvp: true });
 			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
@@ -232,7 +246,9 @@ describe('Guests', () => {
 				rsvp: 'rsvp',
 				message: 'message',
 				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements'
+				dietaryRequirements: 'dietary_requirements',
+				canAddPlusOne: 'can_add_plus_one',
+				plusOneOf: 'plus_one_of'
 			});
 			expect(mockDb.set).toHaveBeenCalledWith({ message: mockResult[0].message });
 			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
@@ -280,7 +296,9 @@ describe('Guests', () => {
 				rsvp: 'rsvp',
 				message: 'message',
 				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements'
+				dietaryRequirements: 'dietary_requirements',
+				canAddPlusOne: 'can_add_plus_one',
+				plusOneOf: 'plus_one_of'
 			});
 			expect(mockDb.set).toHaveBeenCalledWith({
 				dietaryRequirements: mockResult[0].dietaryRequirements
@@ -302,6 +320,62 @@ describe('Guests', () => {
 
 			expect(result).toBe(mockResult);
 			expect(mockDb.set).toHaveBeenCalledWith({ dietaryRequirements: '' });
+		});
+	});
+
+	describe('addPlusOne', () => {
+		const creator = { ...mockGuest, canAddPlusOne: true };
+		const plusOneData = { firstName: 'Jane', lastName: 'Blogs' };
+
+		it('creates a plus one', async () => {
+			mockDb.limit.mockResolvedValue([creator]);
+			mockDb.where
+				.mockReturnValueOnce(mockDb) // getById: chains to .limit()
+				.mockResolvedValueOnce([]); // getPlusOne: no existing plus one
+			mockDb.values.mockReturnThis();
+			const mockInsertResult = [{ ...plusOneData, id: 'plus-one-1', plusOneOf: 'guest-1' }];
+			mockDb.returning.mockResolvedValue(mockInsertResult);
+
+			const result = await guests.addPlusOne('guest-1', plusOneData);
+
+			expect(result).toBe(mockInsertResult);
+			expect(mockDb.insert).toHaveBeenCalledWith({
+				id: 'id',
+				firstName: 'first_name',
+				lastName: 'last_name',
+				phoneNumber: 'phone_number',
+				rsvp: 'rsvp',
+				message: 'message',
+				partnerId: 'partner_id',
+				dietaryRequirements: 'dietary_requirements',
+				canAddPlusOne: 'can_add_plus_one',
+				plusOneOf: 'plus_one_of'
+			});
+			expect(mockDb.values).toHaveBeenCalledWith({
+				...plusOneData,
+				plusOneOf: 'guest-1'
+			});
+		});
+
+		it('throws when guest is not allowed to add a plus one', async () => {
+			mockDb.limit.mockResolvedValue([{ ...mockGuest, canAddPlusOne: false }]);
+
+			await expect(guests.addPlusOne('guest-1', plusOneData)).rejects.toThrow(
+				'Not allowed to add a plus one'
+			);
+			expect(mockDb.insert).not.toHaveBeenCalled();
+		});
+
+		it('throws when plus one already exists', async () => {
+			mockDb.limit.mockResolvedValue([creator]);
+			mockDb.where
+				.mockReturnValueOnce(mockDb) // getById
+				.mockResolvedValueOnce([{ ...mockGuest, id: 'plus-one-1', plusOneOf: 'guest-1' }]); // getPlusOne: existing
+
+			await expect(guests.addPlusOne('guest-1', plusOneData)).rejects.toThrow(
+				'Plus one already added'
+			);
+			expect(mockDb.insert).not.toHaveBeenCalled();
 		});
 	});
 });

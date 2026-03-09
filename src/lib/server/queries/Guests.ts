@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/sqlite-core';
-import { guests, type TGuests } from '../db/schema';
+import { guests, type GuestsInsert, type TGuests } from '../db/schema';
 import { Database } from '../db';
 
 export class Guests {
@@ -62,6 +62,28 @@ export class Guests {
 			.update(guests)
 			.set({ dietaryRequirements })
 			.where(eq(guests.id, guestId))
+			.returning();
+
+		return result;
+	}
+
+	async getPlusOne(guestId: string) {
+		const result = await this.db.select().from(guests).where(eq(guests.plusOneOf, guestId));
+
+		return result;
+	}
+
+	async addPlusOne(guestId: string, plusOneData: GuestsInsert) {
+		const creator = await this.getById(guestId);
+
+		if (!creator.canAddPlusOne) throw new Error('Not allowed to add a plus one');
+
+		const existing = await this.getPlusOne(guestId);
+		if (existing.length > 0) throw new Error('Plus one already added');
+
+		const result = await this.db
+			.insert(guests)
+			.values({ ...plusOneData, plusOneOf: guestId })
 			.returning();
 
 		return result;
