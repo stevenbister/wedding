@@ -24,6 +24,19 @@
 </svelte:head>
 
 <div class="container flex-col align-center">
+	{#if page.status === 404}
+		{@render notFound()}
+	{:else}
+		<h1>{page.status}</h1>
+
+		<SuitAndDress />
+
+		<p class="ta-center space-top-2">Something went wrong!</p>
+		<p class="ta-center space-top-2">{message}</p>
+	{/if}
+</div>
+
+{#snippet notFound()}
 	<h1 class="sr-only">{page.status}: {message}</h1>
 	<svg
 		width="338"
@@ -46,9 +59,14 @@
 	<SuitAndDress />
 
 	<p class="ta-center space-top-2">This page does not exist or has been removed</p>
-</div>
+{/snippet}
 
 <style>
+	h1 {
+		text-align: center;
+		margin-block: var(--size-px-4);
+	}
+
 	.page-not-found {
 		width: 338px;
 		height: auto;

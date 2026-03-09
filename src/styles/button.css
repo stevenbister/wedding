@@ -18,4 +18,15 @@
 		outline: 2px solid var(--blue-4);
 		outline-offset: 2px;
 	}
+
+	&.ghost {
+		background-color: transparent;
+		color: var(--text);
+		border: 1px solid var(--text);
+
+		&.pressed {
+			background-color: var(--text);
+			color: var(--surface);
+		}
+	}
 }

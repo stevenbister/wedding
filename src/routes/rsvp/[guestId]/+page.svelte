@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { ActionData } from './$types';
+	import type { PageProps } from './$types';
 	import Head from '$/lib/components/head.svelte';
-	import GuestSearch from '$/lib/components/guest-search-form.svelte';
+	import RSVP from '$/lib/components/rsvp-form.svelte';
 	import SteveAndGrace from '$lib/components/steve-and-grace.svelte';
 
 	// TODO: Need to add img & desc to the Head
 
-	let { form }: { form: ActionData } = $props();
+	let { data, form }: PageProps = $props();
 </script>
 
 <Head
@@ -18,10 +18,16 @@
 	description=""
 />
 
-<article class="container">
+<article class="container narrow">
 	<SteveAndGrace />
 
-	<GuestSearch {form} />
+	<RSVP
+		guest={{
+			guest: data.guest,
+			partner: data.partner
+		}}
+		{form}
+	/>
 </article>
 
 <style>
