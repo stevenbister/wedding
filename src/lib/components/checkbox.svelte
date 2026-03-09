@@ -28,6 +28,7 @@
 		grid-template-columns: 1em auto;
 		align-items: center;
 		gap: 0.5em;
+		width: fit-content;
 	}
 
 	input {
