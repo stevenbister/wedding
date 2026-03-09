@@ -13,13 +13,20 @@ export const guests = sqliteTable(
 		rsvp: integer({ mode: 'boolean' }),
 		message: text(),
 		partnerId: text('partner_id'),
-		dietaryRequirements: text('dietary_requirements')
+		dietaryRequirements: text('dietary_requirements'),
+		canAddPlusOne: integer('can_add_plus_one', { mode: 'boolean' }).notNull().default(false),
+		plusOneOf: text('plus_one_of')
 	},
 	(table) => [
 		foreignKey({
 			columns: [table.partnerId],
 			foreignColumns: [table.id],
-			name: 'custom_fk'
+			name: 'partner_fk'
+		}),
+		foreignKey({
+			columns: [table.plusOneOf],
+			foreignColumns: [table.id],
+			name: 'plus_one_fk'
 		})
 	]
 );
