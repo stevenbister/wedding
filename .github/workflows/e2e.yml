@@ -33,7 +33,7 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Generate local db
-        run: pnpm db:push --force
+        run: pnpm exec wrangler d1 migrations apply DB --local
 
       - name: Seed local db
         run: pnpm db:seed
