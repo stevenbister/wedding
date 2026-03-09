@@ -21,13 +21,7 @@
 <article class="container narrow">
 	<SteveAndGrace />
 
-	<RSVP
-		guest={{
-			guest: data.guest,
-			partner: data.partner
-		}}
-		{form}
-	/>
+	<RSVP {data} {form} />
 </article>
 
 <style>

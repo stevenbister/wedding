@@ -11,14 +11,14 @@
 	import Chairs from '../illustrations/chairs.svelte';
 
 	interface Props {
-		guest: {
+		data: {
 			guest: TGuests;
 			partner: TGuests | null;
 		};
 		form: ActionData;
 	}
 
-	let { guest, form }: Props = $props();
+	let { data, form }: Props = $props();
 
 	const response = $derived(getRSVPResponseFromForm(form?.guestResponses ?? []));
 </script>
@@ -35,10 +35,10 @@
 			<p class="error" id="error-message" aria-live="polite" transition:fade>{form.message}</p>
 		{/if}
 
-		{@render formFields(guest.guest)}
+		{@render formFields(data.guest)}
 
-		{#if guest.partner}
-			{@render formFields(guest.partner)}
+		{#if data.partner}
+			{@render formFields(data.partner)}
 		{/if}
 
 		<div>
@@ -74,7 +74,7 @@
 
 		<p>{message}</p>
 
-		<a class="btn ghost" href={`/rsvp/${guest.guest.id}`} data-sveltekit-replacestate
+		<a class="btn ghost" href={`/rsvp/${data.guest.id}`} data-sveltekit-replacestate
 			>Change my response</a
 		>
 	</div>
@@ -96,6 +96,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-px-2);
+		width: 100%;
 	}
 
 	.response-message {
