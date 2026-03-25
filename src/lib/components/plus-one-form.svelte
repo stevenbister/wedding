@@ -3,8 +3,6 @@
 	import DietaryRequirements from './rsvp-form-controls/dietary-requirements.svelte';
 
 	let { guest, plusOne }: { guest: TGuests; plusOne: TGuests | null } = $props();
-
-	// TODO: Make first/last name required
 </script>
 
 <fieldset>
@@ -42,6 +40,13 @@
 				isPlusOne
 			/>
 		</div>
+
+		{#if plusOne?.id}
+			<p class="text-light">
+				If you want to remove {plusOne.firstName} from the guest list please get in touch with Steve or
+				Grace.
+			</p>
+		{/if}
 	</div>
 </fieldset>
 
@@ -78,5 +83,9 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-3);
+	}
+
+	p {
+		grid-column: 1 / -1;
 	}
 </style>

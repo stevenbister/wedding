@@ -55,6 +55,13 @@ export const actions = {
 			}
 
 			if (responseData['plus-one']) {
+				if (!responseData['plus-one'].firstname || !responseData['plus-one'].lastname) {
+					return fail(400, {
+						error: true,
+						message: 'Plus one first name and last name are required'
+					});
+				}
+
 				await guests.upsertPlusOne(guestId, {
 					id: responseData['plus-one'].id,
 					firstName: responseData['plus-one'].firstname,

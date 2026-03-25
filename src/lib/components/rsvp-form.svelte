@@ -33,10 +33,6 @@
 	{@render responseMessage(response, content.rsvp.formResponse.rsvp_false)}
 {:else if response === 'no_response'}
 	<form class="form" method="POST" action="?/rsvp" novalidate use:enhance>
-		{#if form?.error}
-			<p class="error" id="error-message" aria-live="polite" transition:fade>{form.message}</p>
-		{/if}
-
 		{@render formFields(data.guest)}
 
 		{#if data.partner}
@@ -50,6 +46,12 @@
 
 		{#if data.guest.canAddPlusOne}
 			<PlusOneForm guest={data.guest} plusOne={data.plusOne} />
+		{/if}
+
+		{#if form?.error}
+			<p class="error text-regular" id="error-message" aria-live="polite" transition:fade>
+				{form.message}
+			</p>
 		{/if}
 
 		<button class="btn">Submit</button>
@@ -111,5 +113,9 @@
 		text-align: center;
 		gap: var(--size-px-3);
 		max-width: 70ch;
+	}
+
+	.error {
+		color: var(--red-9);
 	}
 </style>
