@@ -2,15 +2,19 @@
 	import { fade } from 'svelte/transition';
 	import Checkbox from '../checkbox.svelte';
 
-	const { guestId, dietaryRequirements }: { guestId: string; dietaryRequirements: string | null } =
-		$props();
+	const {
+		guestId,
+		dietaryRequirements,
+		isPlusOne
+	}: { guestId: string; dietaryRequirements: string | null; isPlusOne?: boolean } = $props();
 
 	let isToggled: boolean = $derived(!!dietaryRequirements);
+	let idPrefix = $derived(isPlusOne ? `guests[${guestId}][plus-one]` : `guests[${guestId}]`);
 </script>
 
 <Checkbox
-	id={`guests[${guestId}][has-dietary-requirements]`}
-	name={`guests[${guestId}][has-dietary-requirements]`}
+	id={`${idPrefix}[has-dietary-requirements]`}
+	name={`${idPrefix}[has-dietary-requirements]`}
 	onchange={() => (isToggled = !isToggled)}
 	defaultchecked={!!dietaryRequirements}
 	label="I have dietary requirements"
@@ -18,12 +22,12 @@
 
 {#if isToggled}
 	<div>
-		<label for={`guests[${guestId}][dietary-requirements]`}
+		<label for={`${idPrefix}[dietary-requirements]`}
 			>Please add your dietary requirements here:</label
 		>
 		<textarea
-			name={`guests[${guestId}][dietary-requirements]`}
-			id={`guests[${guestId}][dietary-requirements]`}
+			name={`${idPrefix}[dietary-requirements]`}
+			id={`${idPrefix}[dietary-requirements]`}
 			defaultvalue={dietaryRequirements ? dietaryRequirements : ''}
 			in:fade
 		></textarea>

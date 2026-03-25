@@ -6,12 +6,13 @@
 	let { guest }: { guest: TGuests } = $props();
 
 	let isToggled: boolean = $derived(!!guest.plusOneOf);
+	// TODO: Make first/last name required
 </script>
 
 <fieldset>
 	<Checkbox
-		id={`guests[${guest.id}][can-add-plus-one]`}
-		name={`guests[${guest.id}][can-add-plus-one]`}
+		id="add-plus-one"
+		name="add-plus-one"
 		onchange={() => (isToggled = !isToggled)}
 		defaultchecked={!!guest.plusOneOf}
 		label="Add a plus one"
@@ -21,16 +22,16 @@
 		<div class="input-wrapper">
 			<div class="name-input">
 				<label for="firstname">First name</label>
-				<input id="firstname" name="firstname" type="text" />
+				<input id="firstname" name={`guests[${guest.id}][plus-one][firstname]`} type="text" />
 			</div>
 
 			<div class="name-input">
 				<label for="lastname">Last name</label>
-				<input id="lastname" name="lastname" type="text" />
+				<input id="lastname" name={`guests[${guest.id}][plus-one][lastname]`} type="text" />
 			</div>
 
 			<div class="dietary-requirements">
-				<DietaryRequirements guestId="plus-one" dietaryRequirements="" />
+				<DietaryRequirements guestId={guest.id} dietaryRequirements="" isPlusOne />
 			</div>
 		</div>
 	{/if}

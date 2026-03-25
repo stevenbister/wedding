@@ -51,6 +51,17 @@ export const actions = {
 			if (responseData['dietary-requirements']) {
 				await guests.addDietaryRequirements(guestId, responseData['dietary-requirements']);
 			}
+
+			if (responseData['plus-one']) {
+				await guests.addPlusOne(guestId, {
+					firstName: responseData['plus-one'].firstname,
+					lastName: responseData['plus-one'].lastname,
+					dietaryRequirements: responseData['plus-one']['dietary-requirements'] ?? null,
+					rsvp: true,
+					canAddPlusOne: false
+				});
+			}
+
 			const rsvp = await guests.rsvp(guestId, responseData.rsvp ?? null);
 
 			guestResponses.push(rsvp);

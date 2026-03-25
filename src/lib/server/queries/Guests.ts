@@ -83,7 +83,10 @@ export class Guests {
 
 		const result = await this.db
 			.insert(guests)
-			.values({ ...plusOneData, plusOneOf: guestId })
+			.values({
+				...plusOneData,
+				plusOneOf: guestId
+			})
 			.returning();
 
 		return result;

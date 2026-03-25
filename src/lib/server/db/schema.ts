@@ -4,7 +4,7 @@ import { foreignKey, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 export const guests = sqliteTable(
 	'guests',
 	{
-		id: text()
+		id: text('id')
 			.primaryKey()
 			.$defaultFn(() => crypto.randomUUID()),
 		firstName: text('first_name').notNull(),

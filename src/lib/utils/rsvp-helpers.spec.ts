@@ -36,21 +36,54 @@ describe('getRSVPResponseFromForm', () => {
 });
 
 describe('parseRsvpFormData', () => {
+	const guestId = '00000000-0000-0000-0000-000000000003';
+
 	it('parses the form data and returns it in the correct format', () => {
 		const formData = new FormData();
-		formData.append('guests[00000000-0000-0000-0000-000000000003][rsvp]', 'accept');
-		formData.append('guests[00000000-0000-0000-0000-000000000003][has-dietary-requirements]', 'on');
-		formData.append('guests[00000000-0000-0000-0000-000000000003][dietary-requirements]', 'vegan');
+		formData.append(`guests[${guestId}][rsvp]`, 'accept');
+		formData.append(`guests[${guestId}][has-dietary-requirements]`, 'on');
+		formData.append(`guests[${guestId}][dietary-requirements]`, 'vegan');
 		formData.append('message', '');
 
 		const result = parseRsvpFormData(formData);
 
 		expect(result).toEqual({
 			guests: {
-				'00000000-0000-0000-0000-000000000003': {
+				[guestId]: {
 					rsvp: true,
 					'has-dietary-requirements': 'on',
 					'dietary-requirements': 'vegan'
+				}
+			},
+			message: ''
+		});
+	});
+
+	it('parses the form data and returns it with plus one info in the correct format', () => {
+		const formData = new FormData();
+		formData.append(`guests[${guestId}][rsvp]`, 'accept');
+		formData.append(`guests[${guestId}][has-dietary-requirements]`, 'on');
+		formData.append(`guests[${guestId}][dietary-requirements]`, 'vegan');
+		formData.append(`guests[${guestId}][plus-one][firstname]`, 'Jane');
+		formData.append(`guests[${guestId}][plus-one][lastname]`, 'Blogs');
+		formData.append(`guests[${guestId}][plus-one][has-dietary-requirements]`, 'on');
+		formData.append(`guests[${guestId}][plus-one][dietary-requirements]`, 'vegan');
+		formData.append('message', '');
+
+		const result = parseRsvpFormData(formData);
+
+		expect(result).toEqual({
+			guests: {
+				[guestId]: {
+					rsvp: true,
+					'has-dietary-requirements': 'on',
+					'dietary-requirements': 'vegan',
+					'plus-one': {
+						firstname: 'Jane',
+						lastname: 'Blogs',
+						'has-dietary-requirements': 'on',
+						'dietary-requirements': 'vegan'
+					}
 				}
 			},
 			message: ''
