@@ -61,3 +61,34 @@ test.describe('rsvp', { tag: '@smoke' }, () => {
 		await expect(page.getByText('Thank you!')).toBeVisible();
 	});
 });
+
+test.describe('plus one', { tag: '@smoke' }, () => {
+	test.beforeEach(async ({ page }) => {
+		// Seeded user id - see seed.sql for more values
+		await page.goto('/rsvp/00000000-0000-0000-0000-000000000003');
+	});
+
+	test('user can add a plus one to the guest list', async ({ page }) => {
+		const guest = page.getByRole('group', { name: 'Joe' });
+		const accept = guest.getByRole('button', { name: 'Accept' });
+
+		await accept.click();
+
+		const plusOneGroup = page.getByRole('group', { name: 'Plus one' });
+
+		const firstName = plusOneGroup.getByRole('textbox', { name: 'First name' });
+		const lastName = plusOneGroup.getByRole('textbox', { name: 'Last name' });
+
+		await firstName.fill('Jane');
+		await lastName.fill('Blogs');
+
+		await page.getByRole('button', { name: 'Submit' }).click();
+
+		await expect(page.getByText('Thank you!')).toBeVisible();
+
+		await page.goto('/rsvp/00000000-0000-0000-0000-000000000003');
+
+		await expect(firstName).toHaveValue('Jane');
+		await expect(lastName).toHaveValue('Blogs');
+	});
+});

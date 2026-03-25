@@ -5,8 +5,8 @@
 	let { guest, plusOne }: { guest: TGuests; plusOne: TGuests | null } = $props();
 </script>
 
-<fieldset>
-	<h2>Plus one</h2>
+<fieldset aria-labelledby="plus-one-header">
+	<h2 id="plus-one-header">Plus one</h2>
 
 	<div class="input-wrapper">
 		{#if plusOne?.id}
@@ -42,7 +42,7 @@
 		</div>
 
 		{#if plusOne?.id}
-			<p class="text-light">
+			<p class="">
 				If you want to remove {plusOne.firstName} from the guest list please get in touch with Steve or
 				Grace.
 			</p>
