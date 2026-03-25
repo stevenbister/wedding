@@ -78,7 +78,8 @@ describe('Guests', () => {
 			set: vi.fn().mockReturnThis(),
 			returning: vi.fn(),
 			insert: vi.fn().mockReturnThis(),
-			values: vi.fn()
+			values: vi.fn().mockReturnThis(),
+			onConflictDoUpdate: vi.fn().mockReturnThis()
 		};
 
 		vi.mocked(Database.getInstance).mockReturnValue(mockDb);
@@ -323,7 +324,7 @@ describe('Guests', () => {
 		});
 	});
 
-	describe('addPlusOne', () => {
+	describe('upsertPlusOne', () => {
 		const creator = { ...mockGuest, canAddPlusOne: true };
 		const plusOneData = { firstName: 'Jane', lastName: 'Blogs' };
 
@@ -336,7 +337,7 @@ describe('Guests', () => {
 			const mockInsertResult = [{ ...plusOneData, id: 'plus-one-1', plusOneOf: 'guest-1' }];
 			mockDb.returning.mockResolvedValue(mockInsertResult);
 
-			const result = await guests.addPlusOne('guest-1', plusOneData);
+			const result = await guests.upsertPlusOne('guest-1', plusOneData);
 
 			expect(result).toBe(mockInsertResult);
 			expect(mockDb.insert).toHaveBeenCalledWith({
@@ -360,20 +361,8 @@ describe('Guests', () => {
 		it('throws when guest is not allowed to add a plus one', async () => {
 			mockDb.limit.mockResolvedValue([{ ...mockGuest, canAddPlusOne: false }]);
 
-			await expect(guests.addPlusOne('guest-1', plusOneData)).rejects.toThrow(
+			await expect(guests.upsertPlusOne('guest-1', plusOneData)).rejects.toThrow(
 				'Not allowed to add a plus one'
-			);
-			expect(mockDb.insert).not.toHaveBeenCalled();
-		});
-
-		it('throws when plus one already exists', async () => {
-			mockDb.limit.mockResolvedValue([creator]);
-			mockDb.where
-				.mockReturnValueOnce(mockDb) // getById
-				.mockResolvedValueOnce([{ ...mockGuest, id: 'plus-one-1', plusOneOf: 'guest-1' }]); // getPlusOne: existing
-
-			await expect(guests.addPlusOne('guest-1', plusOneData)).rejects.toThrow(
-				'Plus one already added'
 			);
 			expect(mockDb.insert).not.toHaveBeenCalled();
 		});

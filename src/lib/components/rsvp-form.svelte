@@ -15,6 +15,7 @@
 		data: {
 			guest: TGuests;
 			partner: TGuests | null;
+			plusOne: TGuests | null;
 		};
 		form: ActionData;
 	}
@@ -42,14 +43,14 @@
 			{@render formFields(data.partner)}
 		{/if}
 
-		{#if data.guest.canAddPlusOne}
-			<PlusOneForm guest={data.guest} />
-		{/if}
-
 		<div>
 			<label for="message">If want to leave any other message please add it here</label>
 			<textarea name="message" id="message"></textarea>
 		</div>
+
+		{#if data.guest.canAddPlusOne}
+			<PlusOneForm guest={data.guest} plusOne={data.plusOne} />
+		{/if}
 
 		<button class="btn">Submit</button>
 	</form>

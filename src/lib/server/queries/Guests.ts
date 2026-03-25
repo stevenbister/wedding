@@ -73,19 +73,23 @@ export class Guests {
 		return result;
 	}
 
-	async addPlusOne(guestId: string, plusOneData: GuestsInsert) {
+	async upsertPlusOne(guestId: string, plusOneData: GuestsInsert) {
 		const creator = await this.getById(guestId);
 
 		if (!creator.canAddPlusOne) throw new Error('Not allowed to add a plus one');
-
-		const existing = await this.getPlusOne(guestId);
-		if (existing) throw new Error('Plus one already added');
 
 		const result = await this.db
 			.insert(guests)
 			.values({
 				...plusOneData,
 				plusOneOf: guestId
+			})
+			.onConflictDoUpdate({
+				target: guests.id,
+				set: {
+					...plusOneData,
+					plusOneOf: guestId
+				}
 			})
 			.returning();
 

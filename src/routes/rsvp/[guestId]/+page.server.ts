@@ -19,10 +19,12 @@ export const load: PageServerLoad = async ({ params }) => {
 	const guests = new Guests();
 	const guest = await guests.getById(guestId);
 	const partner = guest.partnerId ? await guests.getPartner(guestId) : null;
+	const plusOne = guest.canAddPlusOne ? await guests.getPlusOne(guestId) : null;
 
 	return {
 		guest,
-		partner
+		partner,
+		plusOne
 	};
 };
 
@@ -53,7 +55,8 @@ export const actions = {
 			}
 
 			if (responseData['plus-one']) {
-				await guests.addPlusOne(guestId, {
+				await guests.upsertPlusOne(guestId, {
+					id: responseData['plus-one'].id,
 					firstName: responseData['plus-one'].firstname,
 					lastName: responseData['plus-one'].lastname,
 					dietaryRequirements: responseData['plus-one']['dietary-requirements'] ?? null,

@@ -1,5 +1,6 @@
 .btn {
 	all: unset;
+	box-sizing: border-box;
 	background-color: var(--text);
 	color: var(--surface);
 	cursor: pointer;
