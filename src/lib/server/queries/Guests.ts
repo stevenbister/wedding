@@ -68,7 +68,7 @@ export class Guests {
 	}
 
 	async getPlusOne(guestId: string) {
-		const result = await this.db.select().from(guests).where(eq(guests.plusOneOf, guestId));
+		const [result] = await this.db.select().from(guests).where(eq(guests.plusOneOf, guestId));
 
 		return result;
 	}
@@ -79,7 +79,7 @@ export class Guests {
 		if (!creator.canAddPlusOne) throw new Error('Not allowed to add a plus one');
 
 		const existing = await this.getPlusOne(guestId);
-		if (existing.length > 0) throw new Error('Plus one already added');
+		if (existing) throw new Error('Plus one already added');
 
 		const result = await this.db
 			.insert(guests)
