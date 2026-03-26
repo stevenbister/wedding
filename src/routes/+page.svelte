@@ -11,12 +11,12 @@
 </script>
 
 <Head
-	title="RSVP"
+	title="Steve and Grace get married!"
 	image={{
-		src: '/social/save-the-date.png',
-		alt: 'Save the date'
+		src: '/social/steve-and-grace-get-married.png',
+		alt: content.rsvp.title
 	}}
-	description=""
+	description={content.social}
 />
 
 <article class="container">
