@@ -63,7 +63,7 @@
 
 {#snippet formFields(guest: TGuests)}
 	<fieldset>
-		<legend>
+		<legend class="cursive">
 			{guest.firstName}
 		</legend>
 
@@ -101,6 +101,12 @@
 
 	fieldset {
 		align-self: stretch;
+	}
+
+	legend {
+		font-size: var(--font-size-7);
+		line-height: var(--font-lineheight-0);
+		margin-bottom: var(--size-3);
 	}
 
 	div {

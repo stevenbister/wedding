@@ -6,7 +6,7 @@
 	let { form }: { form: ActionData } = $props();
 </script>
 
-<form class="form container narrow" method="POST" action="?/search" novalidate use:enhance>
+<form class="form" method="POST" action="?/search" novalidate use:enhance>
 	{#if form?.error}
 		<p class="error" id="error-message" aria-live="polite" transition:fade>{form.message}</p>
 	{/if}
