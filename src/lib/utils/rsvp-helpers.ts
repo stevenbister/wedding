@@ -46,15 +46,15 @@ export function parseRsvpFormData(formData: FormData): ParsedForm {
 		const plusOneField = key.match(/^guests\[(.+?)\]\[plus-one\]\[(.+?)\]$/);
 
 		if (plusOneField) {
-			const [, guestId, field] = plusOneField;
+			const [, guestId, rawField] = plusOneField;
+			const field = rawField as keyof PlusOneFormData;
 
 			if (!result.guests[guestId]) {
 				result.guests[guestId] = {};
 			}
 
 			const guest = result.guests[guestId];
-			guest['plus-one'] = guest['plus-one'] ?? {};
-			guest['plus-one'][field] = value.toString();
+			guest['plus-one']![field] = value.toString();
 		} else if (guestField) {
 			const [, guestId, rawField] = guestField;
 			const field = rawField as keyof GuestFormData;
@@ -74,7 +74,7 @@ export function parseRsvpFormData(formData: FormData): ParsedForm {
 					guest.rsvp = null;
 				}
 			} else {
-				guest[field] = value.toString();
+				guest[field as 'dietary-requirements' | 'message'] = value.toString();
 			}
 		}
 	}
