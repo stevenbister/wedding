@@ -17,7 +17,8 @@ export const content = {
 				'We can’t wait to share our day with you. If anything changes and you can’t make it; just come back here and change your response or just let Steve and Grace know.',
 			rsvp_false:
 				'Sorry we can’t share our day with you. If anything changes and you can make it; just come back here and change your response or just let Steve and Grace know.'
-		}
+		},
+		contact: 'If you have any trouble RSVP-ing please contact either Steve or Grace'
 	},
 	info: {
 		title: 'Info',

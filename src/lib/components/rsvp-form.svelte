@@ -10,6 +10,7 @@
 	import Celebrate from '../illustrations/celebrate.svelte';
 	import Chairs from '../illustrations/chairs.svelte';
 	import PlusOneForm from './plus-one-form.svelte';
+	import Callout from './callout.svelte';
 
 	interface Props {
 		data: {
@@ -55,6 +56,8 @@
 		{/if}
 
 		<button class="btn">Submit</button>
+
+		<Callout description={content.rsvp.contact} class="full-width" />
 	</form>
 {/if}
 
