@@ -14,10 +14,18 @@ export function getRSVPResponseFromForm(
 	}
 }
 
+interface PlusOneFormData {
+	firstname: string;
+	lastname: string;
+	id?: string;
+	'dietary-requirements'?: string;
+}
+
 interface GuestFormData {
 	rsvp?: boolean | null;
 	'dietary-requirements'?: string;
 	message?: string;
+	'plus-one'?: PlusOneFormData;
 }
 
 interface ParsedForm {
@@ -34,28 +42,41 @@ export function parseRsvpFormData(formData: FormData): ParsedForm {
 			continue;
 		}
 
-		const match = key.match(/^guests\[(.+?)\]\[(.+?)\]$/);
-		if (!match) continue;
+		const guestField = key.match(/^guests\[(.+?)\]\[(.+?)\]$/);
+		const plusOneField = key.match(/^guests\[(.+?)\]\[plus-one\]\[(.+?)\]$/);
 
-		const [, guestId, rawField] = match;
-		const field = rawField as keyof GuestFormData;
+		if (plusOneField) {
+			const [, guestId, rawField] = plusOneField;
+			const field = rawField as keyof PlusOneFormData;
 
-		if (!result.guests[guestId]) {
-			result.guests[guestId] = {};
-		}
-
-		const guest = result.guests[guestId];
-
-		if (field === 'rsvp') {
-			if (value === 'accept') {
-				guest.rsvp = true;
-			} else if (value === 'decline') {
-				guest.rsvp = false;
-			} else {
-				guest.rsvp = null;
+			if (!result.guests[guestId]) {
+				result.guests[guestId] = {};
 			}
-		} else {
-			guest[field] = value.toString();
+
+			const guest = result.guests[guestId];
+			guest['plus-one'] = guest['plus-one'] ?? ({} as PlusOneFormData);
+			guest['plus-one']![field] = value.toString();
+		} else if (guestField) {
+			const [, guestId, rawField] = guestField;
+			const field = rawField as keyof GuestFormData;
+
+			if (!result.guests[guestId]) {
+				result.guests[guestId] = {};
+			}
+
+			const guest = result.guests[guestId];
+
+			if (field === 'rsvp') {
+				if (value === 'accept') {
+					guest.rsvp = true;
+				} else if (value === 'decline') {
+					guest.rsvp = false;
+				} else {
+					guest.rsvp = null;
+				}
+			} else {
+				guest[field as 'dietary-requirements' | 'message'] = value.toString();
+			}
 		}
 	}
 

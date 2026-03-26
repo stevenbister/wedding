@@ -9,16 +9,18 @@
 	import { getRSVPResponseFromForm, type RSVPResponse } from '../utils/rsvp-helpers';
 	import Celebrate from '../illustrations/celebrate.svelte';
 	import Chairs from '../illustrations/chairs.svelte';
+	import PlusOneForm from './plus-one-form.svelte';
 
 	interface Props {
-		guest: {
+		data: {
 			guest: TGuests;
 			partner: TGuests | null;
+			plusOne: TGuests | null;
 		};
 		form: ActionData;
 	}
 
-	let { guest, form }: Props = $props();
+	let { data, form }: Props = $props();
 
 	const response = $derived(getRSVPResponseFromForm(form?.guestResponses ?? []));
 </script>
@@ -31,20 +33,26 @@
 	{@render responseMessage(response, content.rsvp.formResponse.rsvp_false)}
 {:else if response === 'no_response'}
 	<form class="form" method="POST" action="?/rsvp" novalidate use:enhance>
-		{#if form?.error}
-			<p class="error" id="error-message" aria-live="polite" transition:fade>{form.message}</p>
-		{/if}
+		{@render formFields(data.guest)}
 
-		{@render formFields(guest.guest)}
-
-		{#if guest.partner}
-			{@render formFields(guest.partner)}
+		{#if data.partner}
+			{@render formFields(data.partner)}
 		{/if}
 
 		<div>
 			<label for="message">If want to leave any other message please add it here</label>
 			<textarea name="message" id="message"></textarea>
 		</div>
+
+		{#if data.guest.canAddPlusOne}
+			<PlusOneForm guest={data.guest} plusOne={data.plusOne} />
+		{/if}
+
+		{#if form?.error}
+			<p class="error text-regular" id="error-message" aria-live="polite" transition:fade>
+				{form.message}
+			</p>
+		{/if}
 
 		<button class="btn">Submit</button>
 	</form>
@@ -74,7 +82,7 @@
 
 		<p>{message}</p>
 
-		<a class="btn ghost" href={`/rsvp/${guest.guest.id}`} data-sveltekit-replacestate
+		<a class="btn ghost" href={`/rsvp/${data.guest.id}`} data-sveltekit-replacestate
 			>Change my response</a
 		>
 	</div>
@@ -96,6 +104,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-px-2);
+		width: 100%;
 	}
 
 	.response-message {
@@ -104,5 +113,9 @@
 		text-align: center;
 		gap: var(--size-px-3);
 		max-width: 70ch;
+	}
+
+	.error {
+		color: var(--red-9);
 	}
 </style>

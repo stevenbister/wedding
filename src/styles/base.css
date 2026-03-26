@@ -29,6 +29,10 @@ h2 {
 	font-size: var(--font-size-7);
 }
 
+h3 {
+	font-weight: var(--font-weight-4);
+}
+
 p {
 	line-height: var(--font-lineheight-1);
 }

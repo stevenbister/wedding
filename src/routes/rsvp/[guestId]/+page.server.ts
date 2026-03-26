@@ -19,10 +19,12 @@ export const load: PageServerLoad = async ({ params }) => {
 	const guests = new Guests();
 	const guest = await guests.getById(guestId);
 	const partner = guest.partnerId ? await guests.getPartner(guestId) : null;
+	const plusOne = guest.canAddPlusOne ? await guests.getPlusOne(guestId) : null;
 
 	return {
 		guest,
-		partner
+		partner,
+		plusOne
 	};
 };
 
@@ -51,6 +53,25 @@ export const actions = {
 			if (responseData['dietary-requirements']) {
 				await guests.addDietaryRequirements(guestId, responseData['dietary-requirements']);
 			}
+
+			if (responseData['plus-one']) {
+				if (!responseData['plus-one'].firstname || !responseData['plus-one'].lastname) {
+					return fail(400, {
+						error: true,
+						message: 'Plus one first name and last name are required'
+					});
+				}
+
+				await guests.upsertPlusOne(guestId, {
+					id: responseData['plus-one'].id,
+					firstName: responseData['plus-one'].firstname,
+					lastName: responseData['plus-one'].lastname,
+					dietaryRequirements: responseData['plus-one']['dietary-requirements'] ?? null,
+					rsvp: true,
+					canAddPlusOne: false
+				});
+			}
+
 			const rsvp = await guests.rsvp(guestId, responseData.rsvp ?? null);
 
 			guestResponses.push(rsvp);
