@@ -54,6 +54,7 @@ export function parseRsvpFormData(formData: FormData): ParsedForm {
 			}
 
 			const guest = result.guests[guestId];
+			guest['plus-one'] = guest['plus-one'] ?? ({} as PlusOneFormData);
 			guest['plus-one']![field] = value.toString();
 		} else if (guestField) {
 			const [, guestId, rawField] = guestField;
