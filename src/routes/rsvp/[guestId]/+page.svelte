@@ -4,6 +4,7 @@
 	import RSVP from '$/lib/components/rsvp-form.svelte';
 	import SteveAndGrace from '$lib/components/steve-and-grace.svelte';
 	import { content } from '$/constants/content';
+	import { details } from '$/constants/details';
 
 	let { data, form }: PageProps = $props();
 </script>
@@ -18,7 +19,10 @@
 />
 
 <article class="container narrow">
-	<SteveAndGrace />
+	<header class="space-top-7">
+		<p>{details.date}</p>
+		<SteveAndGrace />
+	</header>
 
 	<RSVP {data} {form} />
 </article>
@@ -27,6 +31,11 @@
 	article {
 		display: flex;
 		flex-direction: column;
-		gap: var(--size-8);
+		gap: var(--size-7);
+	}
+
+	header {
+		text-align: center;
+		font-size: var(--font-size-4);
 	}
 </style>
