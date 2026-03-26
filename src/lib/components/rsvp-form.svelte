@@ -24,6 +24,12 @@
 	let { data, form }: Props = $props();
 
 	const response = $derived(getRSVPResponseFromForm(form?.guestResponses ?? []));
+
+	$effect(() => {
+		if (response !== 'no_response') {
+			window.scrollTo(0, 0);
+		}
+	});
 </script>
 
 {#if response === 'all_true'}
