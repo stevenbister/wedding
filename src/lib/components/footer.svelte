@@ -12,7 +12,7 @@
 	<Flower1 />
 
 	{#if !page.error}
-		{#if page.route.id === '/'}
+		{#if page.route.id === '/' || page.route.id === '/rsvp/[guestId]'}
 			<Couple />
 		{:else if page.route.id === '/venue'}
 			<Cheers />

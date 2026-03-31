@@ -1,4 +1,8 @@
 /* Typography */
+.serif {
+	font-family: 'Source Serif', serif;
+}
+
 .cursive {
 	font-family: Ephesis, cursive;
 }
@@ -47,6 +51,10 @@
 	margin-inline: auto;
 }
 
+.full-width {
+	width: 100%;
+}
+
 /* Display */
 .hidden {
 	display: none;
@@ -59,6 +67,10 @@
 
 .space-top-3 {
 	margin-block-start: var(--size-px-3);
+}
+
+.space-top-4 {
+	margin-block-start: var(--size-px-4);
 }
 
 .space-top-7 {

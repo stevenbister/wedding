@@ -4,30 +4,45 @@
 	import GuestSearch from '$/lib/components/guest-search-form.svelte';
 	import SteveAndGrace from '$lib/components/steve-and-grace.svelte';
 
-	// TODO: Need to add img & desc to the Head
+	import { content } from '$/constants/content';
+	import { details } from '$/constants/details';
+	import Callout from '$/lib/components/callout.svelte';
 
 	let { form }: { form: ActionData } = $props();
 </script>
 
 <Head
-	title="RSVP"
+	title="Steve and Grace get married!"
 	image={{
-		src: '/social/save-the-date.png',
-		alt: 'Save the date'
+		src: '/social/steve-and-grace-get-married.png',
+		alt: content.rsvp.title
 	}}
-	description=""
+	description={content.social}
 />
 
 <article class="container">
-	<SteveAndGrace />
+	<header class="space-top-7">
+		<p>{details.date}</p>
+		<SteveAndGrace />
+	</header>
 
-	<GuestSearch {form} />
+	<section>
+		<GuestSearch {form} />
+
+		<Callout description={content.rsvp.contact} class="space-top-4" />
+	</section>
 </article>
 
 <style>
 	article {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: var(--size-8);
+	}
+
+	header {
+		text-align: center;
+		font-size: var(--font-size-4);
 	}
 </style>

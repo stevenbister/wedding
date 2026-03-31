@@ -4,7 +4,7 @@
 	import Head from '$/lib/components/head.svelte';
 	import SaveTheDateButton from '$/lib/components/save-the-date-button.svelte';
 	import { content } from '$/constants/content';
-	import { venue } from '$/constants/venue';
+	import { details } from '$/constants/details';
 	import Callout from '$/lib/components/callout.svelte';
 </script>
 
@@ -27,7 +27,7 @@
 
 		<div class="text-box">
 			<p class="text-balance">{content.saveTheDate.ctaSection.description}</p>
-			<p class="text-balance text-regular">{venue.address}</p>
+			<p class="text-balance text-regular">{details.venue.address}</p>
 		</div>
 
 		<SaveTheDateButton />

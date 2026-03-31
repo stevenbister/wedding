@@ -10,6 +10,7 @@
 	import Celebrate from '../illustrations/celebrate.svelte';
 	import Chairs from '../illustrations/chairs.svelte';
 	import PlusOneForm from './plus-one-form.svelte';
+	import Callout from './callout.svelte';
 
 	interface Props {
 		data: {
@@ -23,6 +24,12 @@
 	let { data, form }: Props = $props();
 
 	const response = $derived(getRSVPResponseFromForm(form?.guestResponses ?? []));
+
+	$effect(() => {
+		if (response !== 'no_response') {
+			window.scrollTo(0, 0);
+		}
+	});
 </script>
 
 {#if response === 'all_true'}
@@ -55,12 +62,14 @@
 		{/if}
 
 		<button class="btn">Submit</button>
+
+		<Callout description={content.rsvp.contact} class="full-width" />
 	</form>
 {/if}
 
 {#snippet formFields(guest: TGuests)}
 	<fieldset>
-		<legend>
+		<legend class="cursive">
 			{guest.firstName}
 		</legend>
 
@@ -98,6 +107,12 @@
 
 	fieldset {
 		align-self: stretch;
+	}
+
+	legend {
+		font-size: var(--font-size-7);
+		line-height: var(--font-lineheight-0);
+		margin-bottom: var(--size-3);
 	}
 
 	div {

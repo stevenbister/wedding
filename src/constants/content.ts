@@ -1,4 +1,4 @@
-import { venue } from './venue';
+import { details } from './details';
 
 export const content = {
 	noKids: 'We can’t wait to celebrate with you all. Adults only, please.',
@@ -17,7 +17,8 @@ export const content = {
 				'We can’t wait to share our day with you. If anything changes and you can’t make it; just come back here and change your response or just let Steve and Grace know.',
 			rsvp_false:
 				'Sorry we can’t share our day with you. If anything changes and you can make it; just come back here and change your response or just let Steve and Grace know.'
-		}
+		},
+		contact: 'If you have any trouble RSVP-ing please contact either Steve or Grace'
 	},
 	info: {
 		title: 'Info',
@@ -28,7 +29,7 @@ export const content = {
 				info: [
 					{
 						title: 'Where is the wedding?',
-						content: `<p>The wedding ceremony and reception will be held at:<br><strong>${venue.address}</strong></p><p>For more info see our <a href="/venue">venue page.</a></p>`
+						content: `<p>The wedding ceremony and reception will be held at:<br><strong>${details.venue.address}</strong></p><p>For more info see our <a href="/venue">venue page.</a></p>`
 					},
 					{
 						title: 'What time should I arrive?',
