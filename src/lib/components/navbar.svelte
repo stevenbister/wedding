@@ -27,7 +27,7 @@
 
 <style>
 	nav {
-		margin-block-start: var(--size-px-7);
+		margin-block-start: 42px;
 		font-weight: var(--font-weight-4);
 		font-size: var(--font-size-3);
 	}
