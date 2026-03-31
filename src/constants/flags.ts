@@ -1,3 +1,5 @@
+import { dev } from '$app/environment';
+
 export const flags: Record<string, boolean> = {
-	inviteReady: false
+	inviteReady: dev
 };
