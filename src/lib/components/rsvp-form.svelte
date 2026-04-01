@@ -11,6 +11,7 @@
 	import Chairs from '../illustrations/chairs.svelte';
 	import PlusOneForm from './plus-one-form.svelte';
 	import Callout from './callout.svelte';
+	import Spinner from './spinner.svelte';
 
 	interface Props {
 		data: {
@@ -22,6 +23,7 @@
 	}
 
 	let { data, form }: Props = $props();
+	let isLoading: boolean = $state(false);
 
 	const response = $derived(getRSVPResponseFromForm(form?.guestResponses ?? []));
 
@@ -39,7 +41,21 @@
 {:else if response === 'all_false'}
 	{@render responseMessage(response, content.rsvp.formResponse.rsvp_false)}
 {:else if response === 'no_response'}
-	<form class="form" method="POST" action="?/rsvp" novalidate use:enhance>
+	<form
+		class="form"
+		method="POST"
+		action="?/rsvp"
+		novalidate
+		use:enhance={() => {
+			isLoading = true;
+
+			return async ({ update }) => {
+				update({ invalidateAll: true }).finally(async () => {
+					isLoading = false;
+				});
+			};
+		}}
+	>
 		{@render formFields(data.guest)}
 
 		{#if data.partner}
@@ -61,7 +77,13 @@
 			</p>
 		{/if}
 
-		<button class="btn">Submit</button>
+		<button class="btn">
+			{#if isLoading}
+				<Spinner />
+			{:else}
+				Submit
+			{/if}
+		</button>
 
 		<Callout description={content.rsvp.contact} class="full-width" />
 	</form>
