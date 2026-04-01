@@ -2,11 +2,28 @@
 	import { enhance } from '$app/forms';
 	import { fade } from 'svelte/transition';
 	import type { ActionData } from '../../routes/$types';
+	import Spinner from './spinner.svelte';
 
 	let { form }: { form: ActionData } = $props();
+
+	let isLoading: boolean = $state(false);
 </script>
 
-<form class="form" method="POST" action="?/search" novalidate use:enhance>
+<form
+	class="form"
+	method="POST"
+	action="?/search"
+	novalidate
+	use:enhance={() => {
+		isLoading = true;
+
+		return async ({ update }) => {
+			update({ invalidateAll: true }).finally(async () => {
+				isLoading = false;
+			});
+		};
+	}}
+>
 	{#if form?.error}
 		<p class="error" id="error-message" aria-live="polite" transition:fade>{form.message}</p>
 	{/if}
@@ -25,7 +42,13 @@
 		/>
 	</div>
 
-	<button class="btn">Search</button>
+	<button class="btn" disabled={isLoading}>
+		{#if isLoading}
+			<Spinner />
+		{:else}
+			Search
+		{/if}
+	</button>
 </form>
 
 <style>

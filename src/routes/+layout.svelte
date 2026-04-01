@@ -6,6 +6,7 @@
 	import Lily2 from '$lib/illustrations/lily-2.svelte';
 	import Footer from '$/lib/components/footer.svelte';
 	import NavBar from '$lib/components/navbar.svelte';
+	import LoadingBar from '$lib/components/loading-bar.svelte';
 
 	import { animations } from '$/constants/animations';
 
@@ -44,6 +45,8 @@
 
 <Lily1 />
 <Lily2 />
+
+<LoadingBar />
 
 <NavBar />
 

@@ -1,14 +1,16 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
+	import { navigating } from '$app/state';
 	import Head from '$/lib/components/head.svelte';
 	import GuestSearch from '$/lib/components/guest-search-form.svelte';
 	import SteveAndGrace from '$lib/components/steve-and-grace.svelte';
-
 	import { content } from '$/constants/content';
 	import { details } from '$/constants/details';
 	import Callout from '$/lib/components/callout.svelte';
 
 	let { form }: { form: ActionData } = $props();
+
+	$inspect(navigating);
 </script>
 
 <Head
