@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { content } from '$/constants/content';
 	import Head from '$/lib/components/head.svelte';
+	import Timeline from '$/lib/components/timeline.svelte';
 </script>
 
 <Head
@@ -13,6 +14,10 @@
 />
 
 <h1>{content.schedule.title}</h1>
+
+<div class="container space-top-7">
+	<Timeline />
+</div>
 
 <style>
 	h1 {
