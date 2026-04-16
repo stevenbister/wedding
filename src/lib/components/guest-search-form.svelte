@@ -17,10 +17,18 @@
 	use:enhance={() => {
 		isLoading = true;
 
-		return async ({ update }) => {
-			update({ invalidateAll: true }).finally(async () => {
-				isLoading = false;
-			});
+		return async ({ update, result }) => {
+			update({ invalidateAll: true })
+				.then(() => {
+					const { location } = result as { location: string | undefined };
+					const guestId = location?.split('/')[2];
+					if (guestId) {
+						sessionStorage.setItem('guest-id', guestId);
+					}
+				})
+				.finally(async () => {
+					isLoading = false;
+				});
 		};
 	}}
 >
