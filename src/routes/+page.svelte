@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
-	import { navigating } from '$app/state';
+	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import Head from '$/lib/components/head.svelte';
 	import GuestSearch from '$/lib/components/guest-search-form.svelte';
 	import SteveAndGrace from '$lib/components/steve-and-grace.svelte';
@@ -10,7 +11,15 @@
 
 	let { form }: { form: ActionData } = $props();
 
-	$inspect(navigating);
+	$effect(() => {
+		if (!sessionStorage.getItem('guest-id')) return;
+
+		goto(
+			resolve(`/rsvp/[guestId]`, {
+				guestId: sessionStorage.getItem('guest-id')!
+			})
+		);
+	});
 </script>
 
 <Head
