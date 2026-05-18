@@ -85,7 +85,7 @@
 			{/if}
 		</button>
 
-		<Callout description={content.rsvp.contact} class="full-width" />
+		<Callout description={content.noKids} class="full-width" />
 	</form>
 {/if}
 
