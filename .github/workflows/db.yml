@@ -22,7 +22,7 @@ jobs:
         run: pnpm install
 
       - name: Migrate DB
-        run: pnpm db:migrate
+        run: pnpm db:migrate:remote
         env:
           NODE_ENV: 'production'
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
