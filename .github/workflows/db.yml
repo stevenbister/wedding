@@ -22,7 +22,7 @@ jobs:
         run: pnpm install
 
       - name: Migrate DB
-        run: drizzle-kit migrate
+        run: pnpx drizzle-kit migrate
         env:
           NODE_ENV: 'production'
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
