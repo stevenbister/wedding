@@ -48,6 +48,9 @@ importers:
       '@vitest/browser-playwright':
         specifier: ^4.0.15
         version: 4.0.17(playwright@1.57.0)(vite@7.3.1(@types/node@22.19.7))(vitest@4.0.17)
+      csv:
+        specifier: ^6.6.3
+        version: 6.6.3
       drizzle-kit:
         specifier: ^0.31.8
         version: 0.31.8
@@ -1488,6 +1491,19 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
+  csv-generate@4.6.1:
+    resolution: {integrity: sha512-eELl9K716LSSeP2/YcCjch525JztnnERe3jEARWw2v1FN9ukUYfZTNYZ4Rq2Jj/MFKMauffOy9VCaqQTpFThDQ==}
+
+  csv-parse@7.0.2:
+    resolution: {integrity: sha512-uKZghv9UmPkMVLYy//KZ9HFAIJsl7wkhoEdIL0+rhuSY9pZQlhaeGEDPIe+/w7eh81MOql8Q/9+inAGWG6ZHYA==}
+
+  csv-stringify@6.8.3:
+    resolution: {integrity: sha512-gIeSCvq5F4VtXV3naV3VAewLhBkiZBz+PPhTOA8H3Y8h/ELa+R1ml0GZck/4/Nzo9ep2lvOluilJ6MJlbZsKMA==}
+
+  csv@6.6.3:
+    resolution: {integrity: sha512-X2AnOgcxqV+OdLm1M2FOl+bPQrM1LK1jwo4FhEoq8hi8JTR0tQ8ZWv3x3N2gVMIuUmpb4CLrV08rTP49IdFQ8w==}
+    engines: {node: '>= 0.1.90'}
+
   dayjs@1.11.19:
     resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
 
@@ -2096,6 +2112,9 @@ packages:
 
   std-env@3.10.0:
     resolution: {integrity: sha512-5GS12FdOZNliM5mAOxFRg7Ir0pWz8MdpYm6AY6VPkGpbA7ZzmbzNcBJQ0GPvvyWgcY7QAhCgf9Uy89I03faLkg==}
+
+  stream-transform@3.5.1:
+    resolution: {integrity: sha512-TTDX+qKFr7GGRXATn66rprmlFPx08W0UBIccE/rMPgW2sT7GovduZYP4xcdJ7Nu2YigF17U+CNFxYY11+W1oPw==}
 
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
@@ -3350,6 +3369,19 @@ snapshots:
 
   cssesc@3.0.0: {}
 
+  csv-generate@4.6.1: {}
+
+  csv-parse@7.0.2: {}
+
+  csv-stringify@6.8.3: {}
+
+  csv@6.6.3:
+    dependencies:
+      csv-generate: 4.6.1
+      csv-parse: 7.0.2
+      csv-stringify: 6.8.3
+      stream-transform: 3.5.1
+
   dayjs@1.11.19: {}
 
   debug@4.4.3:
@@ -3964,6 +3996,8 @@ snapshots:
   stackback@0.0.2: {}
 
   std-env@3.10.0: {}
+
+  stream-transform@3.5.1: {}
 
   strip-json-comments@3.1.1: {}
 
