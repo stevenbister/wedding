@@ -15,7 +15,8 @@ export const guests = sqliteTable(
 		partnerId: text('partner_id'),
 		dietaryRequirements: text('dietary_requirements'),
 		canAddPlusOne: integer('can_add_plus_one', { mode: 'boolean' }).notNull().default(false),
-		plusOneOf: text('plus_one_of')
+		plusOneOf: text('plus_one_of'),
+		guestType: text('guest_type').$type<'all_day' | 'evening'>()
 	},
 	(table) => [
 		foreignKey({
