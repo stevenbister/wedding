@@ -157,7 +157,7 @@ readFile(file, (err, fileData) => {
 	writeToSql(formattedRecords);
 
 	runSqlWithWrangler('wedding', outputFile, {
-		remote: remoteFlag ?? false
+		remote: remoteFlag === 'remote'
 	});
 
 	console.log(`Removing ${outputFile} from file system...`);
