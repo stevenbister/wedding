@@ -22,7 +22,8 @@ vi.mock('../db/schema', () => ({
 		partnerId: 'partner_id',
 		dietaryRequirements: 'dietary_requirements',
 		canAddPlusOne: 'can_add_plus_one',
-		plusOneOf: 'plus_one_of'
+		plusOneOf: 'plus_one_of',
+		guestType: 'guest_type'
 	}
 }));
 
@@ -44,7 +45,8 @@ const mockGuest: TGuests = {
 	partnerId: 'guest-2',
 	dietaryRequirements: 'Vegetarian',
 	canAddPlusOne: false,
-	plusOneOf: null
+	plusOneOf: null,
+	guestType: 'all_day'
 };
 
 const mockPartner: TGuests = {
@@ -57,7 +59,8 @@ const mockPartner: TGuests = {
 	partnerId: 'guest-1',
 	dietaryRequirements: null,
 	canAddPlusOne: false,
-	plusOneOf: null
+	plusOneOf: null,
+	guestType: 'all_day'
 };
 
 describe('Guests', () => {
@@ -105,7 +108,8 @@ describe('Guests', () => {
 				partnerId: 'partner_id',
 				dietaryRequirements: 'dietary_requirements',
 				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of'
+				plusOneOf: 'plus_one_of',
+				guestType: 'guest_type'
 			});
 		});
 
@@ -146,7 +150,8 @@ describe('Guests', () => {
 					partnerId: 'partner_id',
 					dietaryRequirements: 'dietary_requirements',
 					canAddPlusOne: 'can_add_plus_one',
-					plusOneOf: 'plus_one_of'
+					plusOneOf: 'plus_one_of',
+					guestType: 'guest_type'
 				},
 				'partner'
 			);
@@ -202,7 +207,8 @@ describe('Guests', () => {
 				partnerId: 'partner_id',
 				dietaryRequirements: 'dietary_requirements',
 				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of'
+				plusOneOf: 'plus_one_of',
+				guestType: 'guest_type'
 			});
 			expect(mockDb.set).toHaveBeenCalledWith({ rsvp: true });
 			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
@@ -249,7 +255,8 @@ describe('Guests', () => {
 				partnerId: 'partner_id',
 				dietaryRequirements: 'dietary_requirements',
 				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of'
+				plusOneOf: 'plus_one_of',
+				guestType: 'guest_type'
 			});
 			expect(mockDb.set).toHaveBeenCalledWith({ message: mockResult[0].message });
 			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
@@ -299,7 +306,8 @@ describe('Guests', () => {
 				partnerId: 'partner_id',
 				dietaryRequirements: 'dietary_requirements',
 				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of'
+				plusOneOf: 'plus_one_of',
+				guestType: 'guest_type'
 			});
 			expect(mockDb.set).toHaveBeenCalledWith({
 				dietaryRequirements: mockResult[0].dietaryRequirements
@@ -350,7 +358,8 @@ describe('Guests', () => {
 				partnerId: 'partner_id',
 				dietaryRequirements: 'dietary_requirements',
 				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of'
+				plusOneOf: 'plus_one_of',
+				guestType: 'guest_type'
 			});
 			expect(mockDb.values).toHaveBeenCalledWith({
 				...plusOneData,
