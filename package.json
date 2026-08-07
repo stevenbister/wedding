@@ -20,6 +20,7 @@
 		"db:push": "node scripts/run-drizzle.js push",
 		"db:studio": "node scripts/run-drizzle.js studio",
 		"db:migrate": "node scripts/run-drizzle.js migrate",
+		"db:migrate:remote": "drizzle-kit migrate",
 		"db:seed": "wrangler d1 execute DB --local --file=src/lib/server/db/seed.sql"
 	},
 	"devDependencies": {
