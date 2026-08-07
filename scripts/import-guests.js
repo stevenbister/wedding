@@ -2,7 +2,12 @@ import { readFile, writeFileSync, unlink } from 'fs';
 import * as csv from 'csv/sync';
 import { execSync } from 'child_process';
 
-const [file] = process.argv.slice(2);
+/**
+ * Script for seeding guests from a csv file into the database
+ * @example node .\scripts\import-guests.js ./guests.csv remote
+ */
+
+const [file, remoteFlag] = process.argv.slice(2);
 const outputFile = './guests.sql';
 
 if (!file) {
@@ -151,7 +156,9 @@ readFile(file, (err, fileData) => {
 	console.log('Writing sql file...');
 	writeToSql(formattedRecords);
 
-	runSqlWithWrangler('wedding', outputFile);
+	runSqlWithWrangler('wedding', outputFile, {
+		remote: remoteFlag ?? false
+	});
 
 	console.log(`Removing ${outputFile} from file system...`);
 	unlink(outputFile, (err) => {
