@@ -54,7 +54,10 @@ export const actions = {
 				await guests.addDietaryRequirements(guestId, responseData['dietary-requirements']);
 			}
 
-			if (responseData['plus-one']) {
+			if (
+				responseData['plus-one'] &&
+				(responseData['plus-one'].firstname || responseData['plus-one'].lastname)
+			) {
 				if (!responseData['plus-one'].firstname || !responseData['plus-one'].lastname) {
 					return fail(400, {
 						error: true,
