@@ -10,8 +10,9 @@
 	import Celebrate from '../illustrations/celebrate.svelte';
 	import Chairs from '../illustrations/chairs.svelte';
 	import PlusOneForm from './plus-one-form.svelte';
-	import Callout from './callout.svelte';
 	import Spinner from './spinner.svelte';
+	import Lily2 from '../illustrations/lily-2.svelte';
+	import Dance from '../illustrations/dance.svelte';
 
 	interface Props {
 		data: {
@@ -41,6 +42,21 @@
 {:else if response === 'all_false'}
 	{@render responseMessage(response, content.rsvp.formResponse.rsvp_false)}
 {:else if response === 'no_response'}
+	<aside>
+		<Dance />
+		{#if data.guest.guestType === 'all_day'}
+			<div>
+				<p>{content.rsvp.formGuestMessage.allDay}</p>
+				<p>Please reply by <strong>{content.rsvp.deadline}</strong></p>
+			</div>
+		{:else if data.guest.guestType === 'evening'}
+			<div>
+				<p>{content.rsvp.formGuestMessage.evening}</p>
+				<p>Please reply by <strong>{content.rsvp.deadline}</strong></p>
+			</div>
+		{/if}
+	</aside>
+
 	<form
 		class="form"
 		method="POST"
@@ -56,6 +72,7 @@
 			};
 		}}
 	>
+		<Lily2 />
 		{@render formFields(data.guest)}
 
 		{#if data.partner}
@@ -85,7 +102,7 @@
 			{/if}
 		</button>
 
-		<Callout description={content.noKids} class="full-width" />
+		<p>{content.noKids}</p>
 	</form>
 {/if}
 
@@ -120,11 +137,35 @@
 {/snippet}
 
 <style>
+	aside {
+		display: flex;
+		align-items: center;
+		font-weight: var(--font-weight-3);
+		text-wrap: balance;
+
+		:global(svg) {
+			flex-shrink: 0;
+			max-width: var(--size-10);
+		}
+	}
+
 	form {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--size-px-5);
+		border: solid 1px var(--text);
+		padding: var(--size-px-3);
+		margin-block: var(--size-px-5);
+		overflow: clip;
+
+		p {
+			font-weight: var(--font-weight-3);
+			font-size: var(--font-size-1);
+			text-align: center;
+			max-width: 40ch;
+		}
 	}
 
 	fieldset {
