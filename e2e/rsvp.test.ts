@@ -10,6 +10,12 @@ test.describe('search guest', { tag: '@smoke' }, () => {
 	});
 
 	test('searches for a guest', async ({ page }) => {
+		const rsvpButton = page.getByRole('link', { name: 'RSVP' });
+
+		await expect(rsvpButton).toBeVisible();
+		await rsvpButton.click();
+		await page.waitForURL('**/rsvp');
+
 		const input = page.getByLabel('Phone number');
 
 		await expect(input).toBeVisible();
@@ -28,8 +34,9 @@ test.describe('rsvp', { tag: '@smoke' }, () => {
 		await page.goto('/rsvp/00000000-0000-0000-0000-000000000001');
 	});
 
-	test('rsvp page has expected h1', async ({ page }) => {
-		await expect(page.getByRole('heading', { level: 1 })).toHaveText('Steve & Grace Get Married!');
+	test('rsvp page has expected heading', async ({ page }) => {
+		await expect(page.getByRole('heading', { level: 1 })).toHaveText('RSVP');
+		await expect(page.getByRole('heading', { level: 2 })).toHaveText('by 1st March, 2027');
 	});
 
 	test('lists the guest and their partner', async ({ page }) => {
