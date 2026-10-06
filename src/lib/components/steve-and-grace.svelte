@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { content } from '$/constants/content';
+	import { brand } from '$/constants/brand';
 </script>
 
 <svg width="515" height="412" viewBox="0 0 515 412" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +72,7 @@
 		fill="var(--text)"
 	/>
 </svg>
-<h1 class="sr-only">{content.rsvp.title}</h1>
+<h1 class="sr-only">{brand.name}</h1>
 
 <style>
 	svg {

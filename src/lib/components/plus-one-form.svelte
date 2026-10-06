@@ -53,8 +53,6 @@
 <style>
 	fieldset {
 		align-self: stretch;
-		border: solid 1px var(--text);
-		padding: var(--size-3);
 	}
 
 	.input-wrapper {

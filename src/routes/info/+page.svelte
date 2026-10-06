@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { content } from '$/constants/content';
+	import { brand } from '$/constants/brand';
 	import Head from '$/lib/components/head.svelte';
 	import Accordion from '$/lib/components/accordion.svelte';
 	import { kebab } from '$/lib/utils/kebab';
@@ -15,7 +16,7 @@
 	title={content.info.title}
 	image={{
 		src: '/social/steve-and-grace-get-married.png',
-		alt: content.rsvp.title
+		alt: brand.name
 	}}
 	description={content.social}
 />

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { fade } from 'svelte/transition';
-	import type { ActionData } from '../../routes/$types';
+	import type { ActionData } from '../../routes/rsvp/$types';
 	import Spinner from './spinner.svelte';
+	import { content } from '$/constants/content';
 
 	let { form }: { form: ActionData } = $props();
 
@@ -32,6 +33,8 @@
 		};
 	}}
 >
+	<p>{content.rsvp.search}</p>
+
 	{#if form?.error}
 		<p class="error" id="error-message" aria-live="polite" transition:fade>{form.message}</p>
 	{/if}
@@ -65,6 +68,10 @@
 		flex-direction: column;
 		gap: var(--size-6);
 		align-items: center;
+	}
+
+	p {
+		text-align: center;
 	}
 
 	.input-container {

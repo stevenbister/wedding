@@ -22,7 +22,7 @@
 	}
 
 	&.ghost {
-		background-color: transparent;
+		background-color: var(--surface);
 		color: var(--text);
 		border: 1px solid var(--text);
 
