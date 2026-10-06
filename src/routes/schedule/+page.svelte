@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { brand } from '$/constants/brand';
 	import { content } from '$/constants/content';
 	import Head from '$/lib/components/head.svelte';
 	import Timeline from '$/lib/components/timeline.svelte';
@@ -8,7 +9,7 @@
 	title={content.schedule.title}
 	image={{
 		src: '/social/steve-and-grace-get-married.png',
-		alt: content.rsvp.title
+		alt: brand.name
 	}}
 	description={content.social}
 />

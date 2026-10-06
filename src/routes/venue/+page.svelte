@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { brand } from '$/constants/brand';
 	import { content } from '$/constants/content';
 	import { details } from '$/constants/details';
 	import Accordion from '$/lib/components/accordion.svelte';
@@ -12,7 +13,7 @@
 	title={content.venue.title}
 	image={{
 		src: '/social/steve-and-grace-get-married.png',
-		alt: content.rsvp.title
+		alt: brand.name
 	}}
 	description={content.social}
 />

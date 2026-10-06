@@ -4,7 +4,7 @@
 	import RSVP from '$/lib/components/rsvp-form.svelte';
 	import SteveAndGrace from '$lib/components/steve-and-grace.svelte';
 	import { content } from '$/constants/content';
-	import { details } from '$/constants/details';
+	import { brand } from '$/constants/brand';
 
 	let { data, form }: PageProps = $props();
 </script>
@@ -13,7 +13,7 @@
 	title={`RSVP for ${data.guest.firstName}`}
 	image={{
 		src: '/social/steve-and-grace-get-married.png',
-		alt: content.rsvp.title
+		alt: brand.name
 	}}
 	description={content.social}
 />
