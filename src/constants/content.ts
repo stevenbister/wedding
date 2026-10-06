@@ -11,12 +11,16 @@ export const content = {
 		}
 	},
 	rsvp: {
-		title: 'Steve & Grace Get Married!',
+		title: 'RSVP',
+		deadline: '1st March, 2027',
+		search: 'Search for your invite by entering your phone number below',
+		invite: 'We invite you to celebrate our wedding at',
+		receptionToFollow: 'Reception to follow',
 		formResponse: {
 			rsvp_true:
-				'We can’t wait to share our day with you. If anything changes and you can’t make it; just come back here and change your response or just let Steve and Grace know.',
+				'We can’t wait to share our day with you. If anything changes and you can’t make it; come back here and change your response or just let Steve and Grace know.',
 			rsvp_false:
-				'Sorry we can’t share our day with you. If anything changes and you can make it; just come back here and change your response or just let Steve and Grace know.'
+				'Sorry we can’t share our day with you. If anything changes and you can make it; come back here and change your response or just let Steve and Grace know.'
 		},
 		contact: 'If you have any trouble RSVP-ing please contact either Steve or Grace'
 	},
