@@ -13,6 +13,7 @@
 	import Spinner from './spinner.svelte';
 	import Lily2 from '../illustrations/lily-2.svelte';
 	import Dance from '../illustrations/dance.svelte';
+	import SaveTheDateButton from './save-the-date-button.svelte';
 
 	interface Props {
 		data: {
@@ -130,9 +131,15 @@
 
 		<p>{message}</p>
 
-		<a class="btn ghost" href={`/rsvp/${data.guest.id}`} data-sveltekit-replacestate
-			>Change my response</a
-		>
+		<div class="btn-container">
+			{#if response === 'all_true' || response === 'some_true'}
+				<SaveTheDateButton />
+			{/if}
+
+			<a class="btn ghost" href={`/rsvp/${data.guest.id}`} data-sveltekit-replacestate
+				>Change my response</a
+			>
+		</div>
 	</div>
 {/snippet}
 
@@ -191,6 +198,17 @@
 		text-align: center;
 		gap: var(--size-px-3);
 		max-width: 70ch;
+	}
+
+	.btn-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: max-content;
+
+		:global(.save-the-date) {
+			width: 100%;
+		}
 	}
 
 	.error {

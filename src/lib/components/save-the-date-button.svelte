@@ -4,7 +4,7 @@
 </script>
 
 <a
-	class="btn"
+	class="btn save-the-date"
 	href="/calendar-invite.ics"
 	download
 	onclick={() => {
