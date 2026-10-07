@@ -2,7 +2,7 @@ import { expect, it, vi, beforeEach, describe, afterEach } from 'vitest';
 import { Guests } from './Guests';
 import { Database } from '../db';
 import { eq } from 'drizzle-orm';
-import { guests as guestsTable, type TGuests } from '../db/schema';
+import { guests as guestsTable, songRequests, type TGuests } from '../db/schema';
 import { env } from 'cloudflare:workers';
 
 const mockGuest: TGuests = {
@@ -65,6 +65,7 @@ describe('Guests', () => {
 	});
 
 	afterEach(async () => {
+		await db.delete(songRequests);
 		await db.delete(guestsTable);
 	});
 
@@ -171,6 +172,41 @@ describe('Guests', () => {
 			await expect(guests.upsertPlusOne('guest-1', plusOneData)).rejects.toThrow(
 				'Not allowed to add a plus one'
 			);
+		});
+	});
+
+	describe('addSongRequest', () => {
+		it('adds a song request for the guest', async () => {
+			const songRequest = 'Bohemian Rhapsody';
+
+			const result = await guests.addSongRequest('guest-1', songRequest);
+
+			expect(result).toEqual([
+				{
+					id: expect.any(String),
+					requestedBy: 'guest-1',
+					song: songRequest
+				}
+			]);
+		});
+	});
+
+	describe('getSongRequest', () => {
+		beforeEach(async () => {
+			await db.insert(songRequests).values({
+				id: 'song-1',
+				requestedBy: 'guest-1',
+				song: 'Bohemian Rhapsody'
+			});
+		});
+
+		it('returns the song request for the guest', async () => {
+			const result = await guests.getSongRequest('guest-1');
+
+			expect(result).toEqual({
+				id: 'song-1',
+				song: 'Bohemian Rhapsody'
+			});
 		});
 	});
 });
