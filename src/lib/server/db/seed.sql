@@ -1,3 +1,4 @@
+DELETE FROM song_requests;
 DELETE FROM guests;
 
 INSERT INTO guests (id, first_name, last_name, phone_number, rsvp, message, partner_id, dietary_requirements, can_add_plus_one, plus_one_of, guest_type)
