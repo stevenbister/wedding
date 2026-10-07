@@ -31,8 +31,6 @@
 
 	const response = $derived(getRSVPResponseFromForm(form?.guestResponses ?? []));
 
-	$inspect(data);
-
 	$effect(() => {
 		if (response !== 'no_response') {
 			window.scrollTo(0, 0);
