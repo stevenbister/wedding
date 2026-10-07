@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { LayoutProps } from './$types';
 	import { onMount } from 'svelte';
 	import { onNavigate } from '$app/navigation';
 	import { gsap } from 'gsap';
@@ -13,7 +14,7 @@
 
 	import '$styles/main.css';
 
-	let { children } = $props();
+	let { data, children }: LayoutProps = $props();
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
@@ -60,7 +61,7 @@
 
 <LoadingBar />
 
-<NavBar />
+<NavBar inviteReady={data.inviteReady} />
 
 <main>
 	{@render children()}
