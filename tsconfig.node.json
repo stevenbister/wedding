@@ -1,0 +1,8 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"include": ["./*.ts"],
+	"compilerOptions": {
+		"composite": true,
+		"types": ["./worker-configuration.d.ts", "node", "@cloudflare/vitest-plugin/types"]
+	}
+}
