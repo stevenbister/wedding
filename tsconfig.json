@@ -11,6 +11,11 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler",
-		"types": ["./worker-configuration.d.ts"]
-	}
+		"types": ["./worker-configuration.d.ts", "@cloudflare/vitest-plugin/types"]
+	},
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

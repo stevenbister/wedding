@@ -99,3 +99,26 @@ test.describe('plus one', { tag: '@smoke' }, () => {
 		await expect(lastName).toHaveValue('Blogs');
 	});
 });
+
+test.describe('song requests', { tag: '@smoke' }, () => {
+	test.beforeEach(async ({ page }) => {
+		// Seeded user id - see seed.sql for more values
+		await page.goto('/rsvp/00000000-0000-0000-0000-000000000003');
+	});
+
+	test('user can submit a song request', async ({ page }) => {
+		const guest = page.getByRole('group', { name: 'Joe' });
+		const accept = guest.getByRole('button', { name: 'Accept' });
+
+		await accept.click();
+
+		const songRequest = page.getByRole('textbox', {
+			name: "Got a song you'll dance to? Share it with us and it might make it into the wedding playlist!"
+		});
+		await songRequest.fill('Bohemian Rhapsody by Queen');
+
+		await page.getByRole('button', { name: 'Submit' }).click();
+
+		await expect(page.getByText('Thank you!')).toBeVisible();
+	});
+});

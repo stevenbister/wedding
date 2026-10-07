@@ -39,12 +39,16 @@ export const actions = {
 				message: 'Please RSVP before submitting the form'
 			});
 		}
+		const [guestId] = Object.keys(parsedData.guests);
 
 		const guests = new Guests();
 
 		if (parsedData.message !== undefined) {
-			const [guestId] = Object.keys(parsedData.guests);
 			await guests.addMessage(guestId, parsedData.message);
+		}
+
+		if (parsedData['song-request'] !== undefined) {
+			await guests.addSongRequest(guestId, parsedData['song-request']);
 		}
 
 		const guestResponses = [];

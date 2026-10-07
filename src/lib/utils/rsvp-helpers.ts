@@ -31,14 +31,15 @@ interface GuestFormData {
 interface ParsedForm {
 	guests: Record<string, GuestFormData>;
 	message?: string;
+	'song-request'?: string;
 }
 
 export function parseRsvpFormData(formData: FormData): ParsedForm {
 	const result: ParsedForm = { guests: {} };
 
 	for (const [key, value] of formData.entries()) {
-		if (key === 'message') {
-			result.message = value.toString();
+		if (key === 'message' || key === 'song-request') {
+			result[key] = value.toString();
 			continue;
 		}
 

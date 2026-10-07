@@ -30,8 +30,14 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Generate types
+        run: pnpm gen
+
       - name: TypeCheck
         run: pnpm check
+
+      - name: Build
+        run: pnpm build
 
       - name: Test
         run: pnpm test:unit

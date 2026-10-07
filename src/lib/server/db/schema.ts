@@ -35,6 +35,20 @@ export const guests = sqliteTable(
 export type TGuests = typeof guests.$inferSelect;
 export type GuestsInsert = typeof guests.$inferInsert;
 
+export const songRequests = sqliteTable('song_requests', {
+	id: text('id')
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
+	song: text('song').notNull(),
+	requestedBy: text('requested_by')
+		.notNull()
+		.unique()
+		.references(() => guests.id)
+});
+
+export type TSongRequests = typeof songRequests.$inferSelect;
+export type SongRequestsInsert = typeof songRequests.$inferInsert;
+
 export const events = sqliteTable('events', {
 	id: integer('id').primaryKey({ autoIncrement: true }),
 	type: text('type', {

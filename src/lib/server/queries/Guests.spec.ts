@@ -1,39 +1,9 @@
-import { expect, it, vi, beforeEach, describe } from 'vitest';
+import { expect, it, vi, beforeEach, describe, afterEach } from 'vitest';
 import { Guests } from './Guests';
 import { Database } from '../db';
-import { alias } from 'drizzle-orm/sqlite-core';
 import { eq } from 'drizzle-orm';
-import type { TGuests } from '../db/schema';
-
-vi.mock('../db', () => ({
-	Database: {
-		getInstance: vi.fn()
-	}
-}));
-
-vi.mock('../db/schema', () => ({
-	guests: {
-		id: 'id',
-		firstName: 'first_name',
-		lastName: 'last_name',
-		phoneNumber: 'phone_number',
-		rsvp: 'rsvp',
-		message: 'message',
-		partnerId: 'partner_id',
-		dietaryRequirements: 'dietary_requirements',
-		canAddPlusOne: 'can_add_plus_one',
-		plusOneOf: 'plus_one_of',
-		guestType: 'guest_type'
-	}
-}));
-
-vi.mock('drizzle-orm', () => ({
-	eq: vi.fn()
-}));
-
-vi.mock('drizzle-orm/sqlite-core', () => ({
-	alias: vi.fn()
-}));
+import { guests as guestsTable, songRequests, type TGuests } from '../db/schema';
+import { env } from 'cloudflare:workers';
 
 const mockGuest: TGuests = {
 	id: 'guest-1',
@@ -53,7 +23,7 @@ const mockPartner: TGuests = {
 	id: 'guest-2',
 	firstName: 'Jane',
 	lastName: 'Doe',
-	phoneNumber: '07123456789',
+	phoneNumber: '07123456788',
 	rsvp: true,
 	message: null,
 	partnerId: 'guest-1',
@@ -63,317 +33,180 @@ const mockPartner: TGuests = {
 	guestType: 'all_day'
 };
 
+const mockGuestPlusOne: TGuests = {
+	id: 'guest-3',
+	firstName: 'John',
+	lastName: 'Doe',
+	phoneNumber: '07123456789',
+	rsvp: true,
+	message: null,
+	partnerId: null,
+	dietaryRequirements: null,
+	canAddPlusOne: true,
+	plusOneOf: null,
+	guestType: 'evening'
+};
+
+Database.initialize(env.DB);
+const db = Database.getInstance();
+
 describe('Guests', () => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	let mockDb: any;
 	let guests: Guests;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		vi.clearAllMocks();
 
-		mockDb = {
-			select: vi.fn().mockReturnThis(),
-			from: vi.fn().mockReturnThis(),
-			where: vi.fn().mockReturnThis(),
-			leftJoin: vi.fn().mockReturnThis(),
-			limit: vi.fn().mockResolvedValue([]),
-			update: vi.fn().mockReturnThis(),
-			set: vi.fn().mockReturnThis(),
-			returning: vi.fn(),
-			insert: vi.fn().mockReturnThis(),
-			values: vi.fn().mockReturnThis(),
-			onConflictDoUpdate: vi.fn().mockReturnThis()
-		};
-
-		vi.mocked(Database.getInstance).mockReturnValue(mockDb);
+		await db.insert(guestsTable).values({ ...mockPartner, partnerId: null });
+		await db.insert(guestsTable).values(mockGuest);
+		await db.insert(guestsTable).values(mockGuestPlusOne);
+		await db.update(guestsTable).set({ partnerId: 'guest-1' }).where(eq(guestsTable.id, 'guest-2'));
 
 		guests = new Guests();
 	});
 
+	afterEach(async () => {
+		await db.delete(songRequests);
+		await db.delete(guestsTable);
+	});
+
 	describe('getByPhoneNumber', () => {
 		it('returns a guest when phone number exists', async () => {
-			mockDb.limit.mockResolvedValue([mockGuest]);
+			const result = await guests.getByPhoneNumber(mockGuest.phoneNumber!);
 
-			const result = await guests.getByPhoneNumber('07123456789');
-
-			expect(result).toBe(mockGuest);
-			expect(mockDb.select).toHaveBeenCalled();
-			expect(mockDb.from).toHaveBeenCalledWith({
-				id: 'id',
-				firstName: 'first_name',
-				lastName: 'last_name',
-				phoneNumber: 'phone_number',
-				rsvp: 'rsvp',
-				message: 'message',
-				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements',
-				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of',
-				guestType: 'guest_type'
-			});
+			expect(result).toEqual(mockGuest);
 		});
 
 		it('returns undefined when phone number does not exist', async () => {
-			mockDb.limit.mockResolvedValue([]);
-
 			const result = await guests.getByPhoneNumber('0000000000');
 
 			expect(result).toBeUndefined();
-		});
-
-		it('calls eq with correct phone number', async () => {
-			mockDb.limit.mockResolvedValue([]);
-
-			await guests.getByPhoneNumber('07123456789');
-
-			expect(eq).toHaveBeenCalledWith('phone_number', '07123456789');
 		});
 	});
 
 	describe('getPartner', () => {
 		it('returns partner when guest has a partner', async () => {
-			vi.mocked(alias).mockReturnValue(mockPartner);
-
-			mockDb.limit.mockResolvedValue([{ partner: mockPartner }]);
-
 			const result = await guests.getPartner('guest-1');
 
-			expect(result).toBe(mockPartner);
-			expect(alias).toHaveBeenCalledWith(
-				{
-					id: 'id',
-					firstName: 'first_name',
-					lastName: 'last_name',
-					phoneNumber: 'phone_number',
-					rsvp: 'rsvp',
-					message: 'message',
-					partnerId: 'partner_id',
-					dietaryRequirements: 'dietary_requirements',
-					canAddPlusOne: 'can_add_plus_one',
-					plusOneOf: 'plus_one_of',
-					guestType: 'guest_type'
-				},
-				'partner'
-			);
+			expect(result).toEqual(mockPartner);
 		});
 
 		it('returns null when guest has no partner', async () => {
-			vi.mocked(alias).mockReturnValue(mockPartner);
-
-			mockDb.limit.mockResolvedValue([]);
+			await db.update(guestsTable).set({ partnerId: null }).where(eq(guestsTable.id, 'guest-1'));
 
 			const result = await guests.getPartner('guest-1');
 
 			expect(result).toBeNull();
-		});
-
-		it('returns null when row exists but partner is null', async () => {
-			vi.mocked(alias).mockReturnValue(mockPartner);
-
-			mockDb.limit.mockResolvedValue([{ partner: null }]);
-
-			const result = await guests.getPartner('guest-1');
-
-			expect(result).toBeNull();
-		});
-
-		it('calls eq with correct guest ID', async () => {
-			vi.mocked(alias).mockReturnValue(mockPartner);
-
-			mockDb.limit.mockResolvedValue([]);
-
-			await guests.getPartner('guest-1');
-
-			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
 		});
 	});
 
 	describe('rsvp', () => {
 		it('updates guest RSVP status and return result', async () => {
-			const mockResult = [mockGuest];
-
-			mockDb.returning.mockResolvedValue(mockResult);
-
 			const result = await guests.rsvp('guest-1', true);
 
-			expect(result).toBe(mockResult[0]);
-			expect(mockDb.update).toHaveBeenCalledWith({
-				id: 'id',
-				firstName: 'first_name',
-				lastName: 'last_name',
-				phoneNumber: 'phone_number',
-				rsvp: 'rsvp',
-				message: 'message',
-				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements',
-				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of',
-				guestType: 'guest_type'
-			});
-			expect(mockDb.set).toHaveBeenCalledWith({ rsvp: true });
-			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
+			expect(result).toEqual({ ...mockGuest, rsvp: true });
 		});
 
 		it('updates guest RSVP status to false', async () => {
-			const mockResult = [
-				{
-					...mockGuest,
-					rsvp: false
-				}
-			];
-
-			mockDb.returning.mockResolvedValue(mockResult);
-
 			const result = await guests.rsvp('guest-1', false);
 
-			expect(result).toBe(mockResult[0]);
-			expect(mockDb.set).toHaveBeenCalledWith({ rsvp: false });
+			expect(result).toEqual({ ...mockGuest, rsvp: false });
 		});
 	});
 
 	describe('addMessage', () => {
 		it('updates guest message and return result', async () => {
-			const mockResult = [
-				{
-					...mockGuest,
-					message: 'Looking forward to the wedding!'
-				}
-			];
+			const message = 'Looking forward to the wedding!';
 
-			mockDb.returning.mockResolvedValue(mockResult);
+			const result = await guests.addMessage('guest-1', message);
 
-			const result = await guests.addMessage('guest-1', mockResult[0].message);
-
-			expect(result).toBe(mockResult);
-			expect(mockDb.update).toHaveBeenCalledWith({
-				id: 'id',
-				firstName: 'first_name',
-				lastName: 'last_name',
-				phoneNumber: 'phone_number',
-				rsvp: 'rsvp',
-				message: 'message',
-				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements',
-				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of',
-				guestType: 'guest_type'
-			});
-			expect(mockDb.set).toHaveBeenCalledWith({ message: mockResult[0].message });
-			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
+			expect(result).toEqual([{ ...mockGuest, message }]);
 		});
 
 		it('handles empty message', async () => {
-			const mockResult = [
-				{
-					...mockGuest,
-					message: ''
-				}
-			];
-
-			mockDb.returning.mockResolvedValue(mockResult);
-
 			const result = await guests.addMessage('guest-1', '');
 
-			expect(result).toBe(mockResult);
-			expect(mockDb.set).toHaveBeenCalledWith({ message: '' });
+			expect(result).toEqual([{ ...mockGuest, message: '' }]);
 		});
 	});
 
 	describe('addDietaryRequirements', () => {
 		it('updates guest dietary requirements and return result', async () => {
-			const mockResult = [
-				{
-					...mockGuest,
-					dietaryRequirements: 'Vegetarian, gluten-free'
-				}
-			];
+			const dietaryRequirements = 'Vegetarian, gluten-free';
 
-			mockDb.returning.mockResolvedValue(mockResult);
+			const result = await guests.addDietaryRequirements('guest-1', dietaryRequirements);
 
-			const result = await guests.addDietaryRequirements(
-				'guest-1',
-				mockResult[0].dietaryRequirements
-			);
-
-			expect(result).toBe(mockResult);
-			expect(mockDb.update).toHaveBeenCalledWith({
-				id: 'id',
-				firstName: 'first_name',
-				lastName: 'last_name',
-				phoneNumber: 'phone_number',
-				rsvp: 'rsvp',
-				message: 'message',
-				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements',
-				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of',
-				guestType: 'guest_type'
-			});
-			expect(mockDb.set).toHaveBeenCalledWith({
-				dietaryRequirements: mockResult[0].dietaryRequirements
-			});
-			expect(eq).toHaveBeenCalledWith('id', 'guest-1');
+			expect(result).toEqual([{ ...mockGuest, dietaryRequirements }]);
 		});
 
 		it('handles empty dietary requirements', async () => {
-			const mockResult = [
-				{
-					...mockGuest,
-					dietaryRequirements: ''
-				}
-			];
-
-			mockDb.returning.mockResolvedValue(mockResult);
-
 			const result = await guests.addDietaryRequirements('guest-1', '');
 
-			expect(result).toBe(mockResult);
-			expect(mockDb.set).toHaveBeenCalledWith({ dietaryRequirements: '' });
+			expect(result).toEqual([{ ...mockGuest, dietaryRequirements: '' }]);
 		});
 	});
 
 	describe('upsertPlusOne', () => {
-		const creator = { ...mockGuest, canAddPlusOne: true };
 		const plusOneData = { firstName: 'Jane', lastName: 'Blogs' };
 
 		it('creates a plus one', async () => {
-			mockDb.limit.mockResolvedValue([creator]);
-			mockDb.where
-				.mockReturnValueOnce(mockDb) // getById: chains to .limit()
-				.mockResolvedValueOnce([]); // getPlusOne: no existing plus one
-			mockDb.values.mockReturnThis();
-			const mockInsertResult = [{ ...plusOneData, id: 'plus-one-1', plusOneOf: 'guest-1' }];
-			mockDb.returning.mockResolvedValue(mockInsertResult);
+			const result = await guests.upsertPlusOne('guest-3', plusOneData);
 
-			const result = await guests.upsertPlusOne('guest-1', plusOneData);
-
-			expect(result).toBe(mockInsertResult);
-			expect(mockDb.insert).toHaveBeenCalledWith({
-				id: 'id',
-				firstName: 'first_name',
-				lastName: 'last_name',
-				phoneNumber: 'phone_number',
-				rsvp: 'rsvp',
-				message: 'message',
-				partnerId: 'partner_id',
-				dietaryRequirements: 'dietary_requirements',
-				canAddPlusOne: 'can_add_plus_one',
-				plusOneOf: 'plus_one_of',
-				guestType: 'guest_type'
-			});
-			expect(mockDb.values).toHaveBeenCalledWith({
-				...plusOneData,
-				plusOneOf: 'guest-1'
-			});
+			expect(result).toEqual([
+				{
+					id: expect.any(String),
+					firstName: 'Jane',
+					lastName: 'Blogs',
+					phoneNumber: null,
+					rsvp: null,
+					message: null,
+					partnerId: null,
+					dietaryRequirements: null,
+					canAddPlusOne: false,
+					plusOneOf: 'guest-3',
+					guestType: null
+				}
+			]);
 		});
 
 		it('throws when guest is not allowed to add a plus one', async () => {
-			mockDb.limit.mockResolvedValue([{ ...mockGuest, canAddPlusOne: false }]);
-
 			await expect(guests.upsertPlusOne('guest-1', plusOneData)).rejects.toThrow(
 				'Not allowed to add a plus one'
 			);
-			expect(mockDb.insert).not.toHaveBeenCalled();
+		});
+	});
+
+	describe('addSongRequest', () => {
+		it('adds a song request for the guest', async () => {
+			const songRequest = 'Bohemian Rhapsody';
+
+			const result = await guests.addSongRequest('guest-1', songRequest);
+
+			expect(result).toEqual([
+				{
+					id: expect.any(String),
+					requestedBy: 'guest-1',
+					song: songRequest
+				}
+			]);
+		});
+	});
+
+	describe('getSongRequest', () => {
+		beforeEach(async () => {
+			await db.insert(songRequests).values({
+				id: 'song-1',
+				requestedBy: 'guest-1',
+				song: 'Bohemian Rhapsody'
+			});
+		});
+
+		it('returns the song request for the guest', async () => {
+			const result = await guests.getSongRequest('guest-1');
+
+			expect(result).toEqual({
+				id: 'song-1',
+				song: 'Bohemian Rhapsody'
+			});
 		});
 	});
 });

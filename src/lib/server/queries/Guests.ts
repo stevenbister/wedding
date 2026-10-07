@@ -1,13 +1,19 @@
 import { eq } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/sqlite-core';
-import { guests, type GuestsInsert, type TGuests } from '../db/schema';
+import { guests, songRequests, type GuestsInsert, type TGuests } from '../db/schema';
 import { Database } from '../db';
 
 export class Guests {
 	readonly db = Database.getInstance();
 
 	async getById(guestId: string) {
-		const [result] = await this.db.select().from(guests).where(eq(guests.id, guestId)).limit(1);
+		const [guest] = await this.db.select().from(guests).where(eq(guests.id, guestId)).limit(1);
+		const songRequest = await this.getSongRequest(guestId);
+
+		const result = {
+			...guest,
+			songRequest: songRequest?.song ?? null
+		};
 
 		return result;
 	}
@@ -92,6 +98,35 @@ export class Guests {
 				}
 			})
 			.returning();
+
+		return result;
+	}
+
+	async addSongRequest(guestId: string, song: string) {
+		const result = await this.db
+			.insert(songRequests)
+			.values({
+				requestedBy: guestId,
+				song
+			})
+			.onConflictDoUpdate({
+				target: songRequests.requestedBy,
+				set: { song }
+			})
+			.returning();
+
+		return result;
+	}
+
+	async getSongRequest(guestId: string) {
+		const [result] = await this.db
+			.select({
+				id: songRequests.id,
+				song: songRequests.song
+			})
+			.from(songRequests)
+			.where(eq(songRequests.requestedBy, guestId))
+			.limit(1);
 
 		return result;
 	}

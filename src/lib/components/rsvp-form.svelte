@@ -17,7 +17,9 @@
 
 	interface Props {
 		data: {
-			guest: TGuests;
+			guest: TGuests & {
+				songRequest: string | null;
+			};
 			partner: TGuests | null;
 			plusOne: TGuests | null;
 		};
@@ -81,8 +83,24 @@
 		{/if}
 
 		<div>
-			<label for="message">If want to leave any other message please add it here</label>
-			<textarea name="message" id="message"></textarea>
+			<label for="message">
+				If you have a favourite memory, thing or anecdote about us (either as a couple or
+				individually) let us know and it might make it into the wedding somewhere</label
+			>
+			<textarea name="message" id="message">{data.guest.message}</textarea>
+		</div>
+
+		<div>
+			<label for="song-request"
+				>Got a song you'll dance to? Share it with us and it might make it into the wedding
+				playlist!</label
+			>
+			<textarea name="song-request" id="song-request" aria-describedby="song-request-description"
+				>{data.guest.songRequest ?? ''}</textarea
+			>
+			<span id="song-request-description" class="field-description"
+				>Include the artist if possible to make it easier for us to find</span
+			>
 		</div>
 
 		{#if data.guest.canAddPlusOne}
