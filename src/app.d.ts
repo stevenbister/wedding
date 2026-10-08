@@ -3,6 +3,7 @@
 
 interface Env {
 	DB: D1Database;
+	INVITE_READY: string;
 }
 
 declare global {

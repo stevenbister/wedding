@@ -1,5 +1,11 @@
 import { expect, test } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+	await page.route('/api/track', async (route) => {
+		await route.fulfill({ status: 200 });
+	});
+});
+
 test.describe('search guest', { tag: '@smoke' }, () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/');
@@ -10,7 +16,7 @@ test.describe('search guest', { tag: '@smoke' }, () => {
 	});
 
 	test('searches for a guest', async ({ page }) => {
-		const rsvpButton = page.getByRole('link', { name: 'RSVP' });
+		const rsvpButton = page.getByRole('link', { name: 'RSVP' }).last(); // Last item so we skip over the nav
 
 		await expect(rsvpButton).toBeVisible();
 		await rsvpButton.click();

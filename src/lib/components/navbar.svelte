@@ -1,28 +1,27 @@
 <script lang="ts">
-	import { flags } from '$constants/flags';
+	const props: { inviteReady: boolean } = $props();
 
 	type NavItem = {
 		label: string;
 		href: string;
-		requiresInvite?: boolean;
 	};
 
 	const navItems: NavItem[] = [
-		{ label: 'RSVP', href: '/', requiresInvite: true },
-		{ label: 'Venue', href: '/venue', requiresInvite: true },
-		{ label: 'Schedule', href: '/schedule', requiresInvite: true },
-		{ label: 'Info', href: '/info', requiresInvite: true }
+		{ label: 'RSVP', href: '/' },
+		{ label: 'Venue', href: '/venue' },
+		{ label: 'Schedule', href: '/schedule' },
+		{ label: 'Info', href: '/info' }
 	];
-
-	const visibleNavItems = navItems.filter((item) => flags.inviteReady || !item.requiresInvite);
 </script>
 
 <nav class="navbar">
-	<ul>
-		{#each visibleNavItems as item (item.label)}
-			<li><a href={item.href}>{item.label}</a></li>
-		{/each}
-	</ul>
+	{#if props.inviteReady}
+		<ul>
+			{#each navItems as item (item.label)}
+				<li><a href={item.href}>{item.label}</a></li>
+			{/each}
+		</ul>
+	{/if}
 </nav>
 
 <style>

@@ -38,6 +38,12 @@ jobs:
       - name: Seed local db
         run: pnpm db:seed
 
+      - name: Create API .env for tests
+        run: |
+          {
+            echo "INVITE_READY=true"
+          } > .env
+
       - name: Run Playwright tests
         run: pnpm test:e2e
 
