@@ -7,6 +7,7 @@
 	import Footer from '$/lib/components/footer.svelte';
 	import NavBar from '$lib/components/navbar.svelte';
 	import LoadingBar from '$lib/components/loading-bar.svelte';
+	import { fadeIn } from '$lib/actions/fade-in';
 
 	import '$styles/main.css';
 
@@ -31,7 +32,7 @@
 
 <NavBar inviteReady={data.inviteReady} />
 
-<main>
+<main use:fadeIn>
 	{@render children()}
 </main>
 

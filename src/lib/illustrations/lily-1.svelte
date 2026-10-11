@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { draw } from '$lib/actions/draw';
+</script>
+
 <svg
 	width="279"
 	height="279"
@@ -5,6 +9,7 @@
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	class="lily-1 decorative draw"
+	use:draw={{ delay: 0 }}
 >
 	<mask
 		id="mask1_124_3850"

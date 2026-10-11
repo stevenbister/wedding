@@ -91,3 +91,29 @@
 .decorative {
 	pointer-events: none;
 }
+
+/* Hidden until the `draw` action reveals + animates them on mount.  */
+.draw {
+	visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.draw {
+		visibility: visible;
+	}
+}
+
+/* Hidden until the `fadeIn` action reveals + fades them on mount. */
+main,
+.navbar,
+.footer {
+	opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	main,
+	.navbar,
+	.footer {
+		opacity: 1;
+	}
+}

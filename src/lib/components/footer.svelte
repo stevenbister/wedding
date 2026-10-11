@@ -6,9 +6,10 @@
 	import Couple from '$lib/illustrations/couple.svelte';
 	import Groomsmen from '$lib/illustrations/groomsmen.svelte';
 	import Cheers from '$lib/illustrations/cheers.svelte';
+	import { fadeIn } from '../actions/fade-in';
 </script>
 
-<footer>
+<footer class="footer" use:fadeIn>
 	<Flower1 />
 
 	{#if !page.error}

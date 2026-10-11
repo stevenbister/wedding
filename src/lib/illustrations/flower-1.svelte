@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { draw } from '$lib/actions/draw';
+</script>
+
 <svg
 	width="201"
 	height="201"
@@ -5,6 +9,7 @@
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	class="flower-1 decorative draw"
+	use:draw={{ duration: 2.6, delay: 0 }}
 >
 	<g clip-path="url(#clip0_111_2641)">
 		<mask id="path-1-inside-1_111_2641" fill="white">

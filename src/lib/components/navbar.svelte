@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fadeIn } from '$lib/actions/fade-in';
+
 	const props: { inviteReady: boolean } = $props();
 
 	type NavItem = {
@@ -14,7 +16,7 @@
 	];
 </script>
 
-<nav class="navbar">
+<nav class="navbar" use:fadeIn>
 	{#if props.inviteReady}
 		<ul>
 			{#each navItems as item (item.label)}

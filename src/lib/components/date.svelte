@@ -1,6 +1,7 @@
 <script lang="ts">
 	import dayjs from 'dayjs';
 	import { getDateRangeAround, getMonthAndYear } from '$lib/utils/dates';
+	import { draw } from '$lib/actions/draw';
 
 	const date = dayjs('2027-06-17');
 	const dateList = getDateRangeAround(date);
@@ -15,11 +16,13 @@
 				{#if date.target}
 					<svg
 						id="circle"
+						class="draw"
 						width="45"
 						height="49"
 						viewBox="0 0 45 49"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
+						use:draw={{ delay: 0.8, ease: 'easeOut' }}
 					>
 						<path
 							class="circle-path"
