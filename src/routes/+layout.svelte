@@ -1,16 +1,12 @@
 <script lang="ts">
 	import type { LayoutProps } from './$types';
-	import { onMount } from 'svelte';
 	import { onNavigate } from '$app/navigation';
-	import { gsap } from 'gsap';
 
 	import Lily1 from '$lib/illustrations/lily-1.svelte';
 	import Lily2 from '$lib/illustrations/lily-2.svelte';
 	import Footer from '$/lib/components/footer.svelte';
 	import NavBar from '$lib/components/navbar.svelte';
 	import LoadingBar from '$lib/components/loading-bar.svelte';
-
-	import { animations } from '$/constants/animations';
 
 	import '$styles/main.css';
 
@@ -25,34 +21,6 @@
 				await navigation.complete;
 			});
 		});
-	});
-
-	onMount(() => {
-		const tl = gsap.timeline({
-			defaults: {
-				duration: 1.5,
-				ease: animations.ease
-			}
-		});
-
-		tl.set(['.draw', '#circle'], {
-			opacity: 1
-		})
-			.from(['.draw path'], { drawSVG: 0, duration: animations.drawDuration })
-			.to(
-				['main', '.navbar'],
-				{
-					opacity: 1
-				},
-				'<'
-			)
-			.from(
-				'#circle path',
-				{
-					drawSVG: 0
-				},
-				'-=3'
-			);
 	});
 </script>
 
@@ -102,11 +70,5 @@
 			top: -95px;
 			right: -95px;
 		}
-	}
-
-	main,
-	:global(.navbar),
-	:global(.draw) {
-		opacity: 0;
 	}
 </style>
