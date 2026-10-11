@@ -35,20 +35,3 @@
 		</clipPath>
 	</defs>
 </svg>
-
-<style>
-	svg {
-		--size: 200px;
-
-		width: var(--size);
-		height: var(--size);
-
-		@media (min-width: 48rem) {
-			--size: 280px;
-		}
-
-		@media (min-width: 80rem) {
-			--size: 350px;
-		}
-	}
-</style>

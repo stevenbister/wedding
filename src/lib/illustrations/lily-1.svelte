@@ -33,20 +33,3 @@
 		/>
 	</g>
 </svg>
-
-<style>
-	svg {
-		--size: 178px;
-
-		width: var(--size);
-		height: var(--size);
-
-		@media (min-width: 36rem) {
-			--size: 250px;
-		}
-
-		@media (min-width: 80rem) {
-			--size: 380px;
-		}
-	}
-</style>

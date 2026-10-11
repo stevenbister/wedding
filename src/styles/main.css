@@ -3,4 +3,5 @@
 @import './base.css' layer(base);
 @import './button.css' layer(components);
 @import './forms.css' layer(components);
+@import './illustrations.css' layer(components);
 @import './utils.css' layer(utils);
