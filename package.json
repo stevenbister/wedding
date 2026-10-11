@@ -55,7 +55,7 @@
 		"vite": "^7.2.6",
 		"vitest": "^4.1.11",
 		"vitest-browser-svelte": "^2.0.1",
-		"wrangler": "^4.61.1"
+		"wrangler": "^4.149.0"
 	},
 	"dependencies": {
 		"dayjs": "^1.11.19",
