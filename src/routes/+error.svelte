@@ -2,21 +2,8 @@
 	import { buildMetaTitle } from '$/lib/utils/meta';
 	import { page } from '$app/state';
 	import SuitAndDress from '$lib/illustrations/suit-and-dress.svelte';
-	import { gsap } from 'gsap';
-	import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
-	import { onMount } from 'svelte';
 
 	const message = page.error?.message ?? 'Unexpected error';
-
-	onMount(() => {
-		gsap.registerPlugin(DrawSVGPlugin);
-
-		gsap.from('.suit-and-dress path', {
-			duration: 5,
-			drawSVG: 0,
-			ease: 'power1.in'
-		});
-	});
 </script>
 
 <svelte:head>

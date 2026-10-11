@@ -1,0 +1,87 @@
+.lily-1,
+.lily-2,
+.flower-1 {
+	position: absolute;
+}
+
+.lily-1 {
+	--size: 178px;
+
+	width: var(--size);
+	height: var(--size);
+	top: -40px;
+	left: -75px;
+
+	@media (min-width: 36rem) {
+		--size: 250px;
+
+		top: -90px;
+		left: -30px;
+	}
+
+	@media (min-width: 80rem) {
+		--size: 380px;
+
+		top: -135px;
+		left: -55px;
+	}
+}
+
+.lily-2 {
+	--size: 178px;
+
+	width: var(--size);
+	height: var(--size);
+	top: -36px;
+	right: -60px;
+
+	@media (min-width: 36rem) {
+		--size: 320px;
+
+		top: -95px;
+		right: -95px;
+	}
+
+	@media (min-width: 80rem) {
+		--size: 380px;
+	}
+}
+
+.flower-1 {
+	--size: 200px;
+	--flower-offset: -76px;
+
+	width: var(--size);
+	height: var(--size);
+	bottom: 0;
+
+	&:first-child {
+		left: var(--flower-offset);
+	}
+
+	&:last-child {
+		transform: scalex(-1);
+		right: var(--flower-offset);
+	}
+
+	@media (min-width: 48rem) {
+		--size: 280px;
+		--flower-offset: -100px;
+	}
+
+	@media (min-width: 80rem) {
+		--size: 350px;
+		--flower-offset: -120px;
+	}
+}
+
+.footer-illustration {
+	--size: 150px;
+
+	width: var(--size);
+	height: var(--size);
+
+	@media (min-width: 48rem) {
+		--size: 200px;
+	}
+}

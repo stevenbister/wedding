@@ -4,7 +4,6 @@
 	import { resolve } from '$app/paths';
 	import Head from '$/lib/components/head.svelte';
 	import GuestSearch from '$/lib/components/guest-search-form.svelte';
-	import SteveAndGrace from '$lib/components/steve-and-grace.svelte';
 	import { content } from '$/constants/content';
 	import Callout from '$/lib/components/callout.svelte';
 	import { brand } from '$/constants/brand';
@@ -33,7 +32,8 @@
 
 <article class="container">
 	<header>
-		<SteveAndGrace />
+		<h1 class="serif">{content.rsvp.title}</h1>
+		<h2>by {content.rsvp.deadline}</h2>
 	</header>
 
 	<section>
@@ -45,11 +45,17 @@
 
 <style>
 	header {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-px-3);
 		text-align: center;
 		font-size: var(--font-size-4);
-		margin-block-end: var(--size-px-6);
+		margin-block: var(--size-px-4);
+	}
+
+	h1 {
+		font-size: var(--font-size-8);
+		text-align: center;
+	}
+
+	h2 {
+		font-size: var(--font-size-5);
 	}
 </style>

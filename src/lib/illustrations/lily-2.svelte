@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { draw } from '$lib/actions/draw';
+</script>
+
 <svg
 	width="178"
 	height="178"
@@ -5,6 +9,7 @@
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	class="lily-2 decorative draw"
+	use:draw={{ delay: 0.15 }}
 >
 	<g clip-path="url(#clip0_122_3832)">
 		<mask
@@ -51,20 +56,3 @@
 		</clipPath>
 	</defs>
 </svg>
-
-<style>
-	svg {
-		--size: 178px;
-
-		width: var(--size);
-		height: var(--size);
-
-		@media (min-width: 36rem) {
-			--size: 320px;
-		}
-
-		@media (min-width: 80rem) {
-			--size: 380px;
-		}
-	}
-</style>

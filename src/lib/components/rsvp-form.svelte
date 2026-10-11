@@ -191,6 +191,12 @@
 			text-align: center;
 			max-width: 40ch;
 		}
+
+		:global(.lily-2) {
+			--size: 178px;
+			top: -36px;
+			right: -60px;
+		}
 	}
 
 	fieldset {

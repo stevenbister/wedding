@@ -6,9 +6,10 @@
 	import Couple from '$lib/illustrations/couple.svelte';
 	import Groomsmen from '$lib/illustrations/groomsmen.svelte';
 	import Cheers from '$lib/illustrations/cheers.svelte';
+	import { fadeIn } from '../actions/fade-in';
 </script>
 
-<footer>
+<footer class="footer" use:fadeIn>
 	<Flower1 />
 
 	{#if !page.error}
@@ -39,41 +40,6 @@
 
 		@media (min-width: 80rem) {
 			padding-block-start: var(--size-px-12);
-		}
-
-		:global(.footer-illustration) {
-			--size: 150px;
-
-			width: var(--size);
-			height: var(--size);
-
-			@media (min-width: 48rem) {
-				--size: 200px;
-			}
-		}
-
-		:global(.flower-1) {
-			--flower-offset: -76px;
-
-			position: absolute;
-			bottom: 0;
-
-			&:first-child {
-				left: var(--flower-offset);
-			}
-
-			&:last-child {
-				transform: scalex(-1);
-				right: var(--flower-offset);
-			}
-
-			@media (min-width: 48rem) {
-				--flower-offset: -100px;
-			}
-
-			@media (min-width: 80rem) {
-				--flower-offset: -120px;
-			}
 		}
 	}
 </style>
