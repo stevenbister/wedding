@@ -15,6 +15,7 @@
 				<p>{time}</p>
 				<p class="text-light">{content}</p>
 			</div>
+
 			<div class="timeline-illustration">
 				<svelte:component this={illustration} />
 			</div>
@@ -73,17 +74,20 @@
 	.timeline-content,
 	.timeline-illustration {
 		width: 50%;
+		flex: 1;
 	}
 
 	.timeline-content {
 		p {
 			max-width: 40ch;
+			margin-block-end: var(--size-1);
 		}
 	}
 
 	.timeline-illustration {
 		display: flex;
 		justify-content: flex-start;
+		padding-inline: var(--size-3);
 
 		:global(svg) {
 			width: 120px;
