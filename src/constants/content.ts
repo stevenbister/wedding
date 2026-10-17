@@ -42,17 +42,17 @@ export const content = {
 					{
 						title: 'What time should I arrive?',
 						content:
-							'Please arrive between 11.30 and 12, ready to take your seats at around 12.20. The bar will be open an hour before the ceremony, if you wish to buy a drink, and there’s plenty of seats around the venue before making your way into the ceremony room.'
+							'Please arrive between 12 and 12.30, ready to take your seats at around 12.40. The bar will be open an hour before the ceremony, if you wish to buy a drink, and there’s plenty of seats around the venue before making your way into the ceremony room.'
 					},
 					{
 						title: 'What’s the timelines of the day?',
 						content:
-							'We ask that guests arrive between 11.30am-12pm, and take your seats at 12.20, ready for the ceremony to start at 12.30pm. We’ll follow this with cocktail hour, the wedding breakfast, and then party time. The dj will stop spinning and the bar will stop serving at 12am. We’ll then ask you to start making your way home by 12.30/1am.'
+							'We ask that daytime guests arrive between 12pm-12.30pm, and take your seats at 12.40, ready for the ceremony to start at 1pm. We’ll follow this with cocktail hour, the wedding breakfast, and then party time. The DJ will stop spinning and the bar will stop serving at 12am. We’ll then ask you to start making your way home by 12.30/1am.'
 					},
 					{
 						title: 'How and when to RSVP?',
 						content:
-							'<p>You can RSVP online here ____  or by emailing <a href="mailto:steveandgracegetmarried@gmail.com">steveandgracegetmarried@gmail.com</a></p><p>Please RSVP by _____</p>'
+							'<p>You can <a href="/rsvp">RSVP online here</a> or by emailing <a href="mailto:steveandgracegetmarried@gmail.com">steveandgracegetmarried@gmail.com</a></p><p>Please RSVP by 1st March 2027</p>'
 					},
 					{
 						title: 'What’s the dress code / Should I bring anything?',
@@ -78,7 +78,7 @@ export const content = {
 					{
 						title: 'Will there be parking?',
 						content:
-							'<p>There is onsite parking at the venue, and the above hotels.</p><p>We need to add in something about picking up vehicles the next morning if you’re staying etc.</p><p><strong>Please note - you’ll need to collect your car from the venue by 11am, and cars are left at your own risk as gates to our car parks are not locked.</strong></p>'
+							'<p>There is onsite parking at the venue, and the below hotels.</p><p><strong>Please note - you’ll need to collect your car from the venue by 11am, and cars are left at your own risk as gates to our car parks are not locked.</strong></p>'
 					},
 					{
 						title: 'Can I charge my car at the venue?',
@@ -88,7 +88,7 @@ export const content = {
 					{
 						title: 'What are my accommodation options?',
 						content:
-							'<p>Dodmoor House has excellent links with two local hotels <a href="https://all.accor.com/hotel/A0I0/index.en.shtml?merchantid=ppc-ach-gen-goo-uk-en-pmax-novotel&sourceid=aw-cen&utm_source=google&utm_medium=cpc&merchantid=ppc-ach-gen-goo-uk-en-pmax&sourceid=aw-censear-aaw-cen&utm_source=google&utm_medium=cpc&utm_campaign=ppc-ach-gen-goo-uk-en-reg_top-pmax-s&utm_term=gen&utm_content=uk-en-all-all&gad_source=1&gad_campaignid=22978831628&gbraid=0AAAAADo0MF9TcDUYW8JlscrxqEwrIkNQq&gclid=Cj0KCQjwo63HBhCKARIsAHOHV_W1ZCT1Ad_t6zf1gGpyWYGauQLjZRteZQ7VdDCXc75dXx179nLWQrsaAp4OEALw_wcB" target="_blank" rel="noreferrer noopener">The Mercure, Daventry Court Hotel</a> and the <a href="https://www.stavertonpark.co.uk/" target="_blank" rel="noreferrer noopener">Staverton Park Hotel</a>. The room includes bed & breakfast, and group transport provided by us at the end of the night (so you would need to book your own taxi if you wanted to leave any earlier).</p><p>We will provide a code you must use in order to be included within the transport.</p><p><strong>Please note that allocations run out six weeks before the wedding day and rooms must be booked using your specific allocation code to be included in the transport.</strong></p><p><strong>Also, if you do not book using the below instructions you will have to make your own transport arrangements on the evening.</strong></p>'
+							'<p>Dodmoor House has an excellent link with a local hotel, <a href="https://all.accor.com/hotel/A0I0/index.en.shtml?merchantid=ppc-ach-gen-goo-uk-en-pmax-novotel&sourceid=aw-cen&utm_source=google&utm_medium=cpc&merchantid=ppc-ach-gen-goo-uk-en-pmax&sourceid=aw-censear-aaw-cen&utm_source=google&utm_medium=cpc&utm_campaign=ppc-ach-gen-goo-uk-en-reg_top-pmax-s&utm_term=gen&utm_content=uk-en-all-all&gad_source=1&gad_campaignid=22978831628&gbraid=0AAAAADo0MF9TcDUYW8JlscrxqEwrIkNQq&gclid=Cj0KCQjwo63HBhCKARIsAHOHV_W1ZCT1Ad_t6zf1gGpyWYGauQLjZRteZQ7VdDCXc75dXx179nLWQrsaAp4OEALw_wcB" target="_blank" rel="noreferrer noopener">The Mercure, Daventry Court Hotel</a>. The room includes bed & breakfast, and group transport provided by us at the end of the night (so you would need to book your own taxi if you wanted to leave any earlier).</p><p>We will provide a code you must use in order to be included within the transport.</p><p><strong>Please note that allocations run out six weeks before the wedding day and rooms must be booked using your specific allocation code to be included in the transport.</strong></p><p><strong>Also, if you do not book using the below instructions you will have to make your own transport arrangements for the evening.</strong></p><h3>The Mecure Daventry Court Hotel</h3><p>You can <a href="https://all.accor.com/hotel/A0I0/index.en.shtml?merchantid=ppc-ach-gen-goo-uk-en-pmax-novotel&sourceid=aw-cen&utm_source=google&utm_medium=cpc&merchantid=ppc-ach-gen-goo-uk-en-pmax&sourceid=aw-censear-aaw-cen&utm_source=google&utm_medium=cpc&utm_campaign=ppc-ach-gen-goo-uk-en-reg_top-pmax-s&utm_term=gen&utm_content=uk-en-all-all&gad_source=1&gad_campaignid=22978831628&gbraid=0AAAAADo0MF9TcDUYW8JlscrxqEwrIkNQq&gclid=Cj0KCQjwo63HBhCKARIsAHOHV_W1ZCT1Ad_t6zf1gGpyWYGauQLjZRteZQ7VdDCXc75dXx179nLWQrsaAp4OEALw_wcB" target="_blank" rel="norefferer noopener">book online here</a>. Scroll to Our Accommodation, select the dates needed, and under the special rate drop down enter the preferential rate code: <strong>DODMBB</strong> and book a Dodmoor Weddings. This will ensure you get transport included within your stay. Please also include the allocation code: <strong>GRASTEV170627</strong> or <strong>Bister/Tondeur</strong> under the "A Clarification To Add" notes box when confirming your booking, this will tie you to the transport list.<p><p>You can also phone or email if you’d prefer: Phone: 01327 307 000 (option 2) or Email: <a href="mailto:HA0I0-RE@accor.com">HA0I0-RE@accor.com</a></p><h3>Other Options</h3><p>You can of course pick your own choice of accommodation, but please be mindful you’ll have to arrange your own transport to and from the venue.</p><p>There are several taxi companies in the local area:</p><ul><li>Daventry- Link Hire 01327 704000</li><li>Northampton- Take Me Taxis 01604 626262</li><li>Milton Keynes: Skyline Taxis 01908 222111</li></ul>'
 					}
 				]
 			},
@@ -134,7 +134,7 @@ export const content = {
 					{
 						title: 'Is there a gift list?',
 						content:
-							'We are so excited to have you join our special day, and your presence is the best gift we could ask for. If you would, however, like to honour us with a gift, we’d greatly appreciate a contribution towards our honeymoon fund.'
+							'<p>We are so excited to have you join our special day, and your presence is the best gift we could ask for. If you would, however, like to honour us with a gift, we’d greatly appreciate a contribution towards our honeymoon fund.</p><p>There will also be a postbox on the day if you have any cards for us.</p>'
 					}
 				]
 			},
@@ -150,9 +150,8 @@ export const content = {
 					{
 						title: 'Accessibility',
 						content:
-							'Dodmoor House is very accessible, with slopes in the courtyard and ramps available if needed. Our bar is located upstairs and as we are Grade 2 listed we do not have a lift, we will however offer waitress service to guests throughout the day and evening. We can also reserve you a parking space close to the venue, please get in touch to reserve a spot. We do also have an accessible toilet and baby changing facilities.'
-					},
-					{ title: 'Confetti', content: '' }
+							'<p>Dodmoor House is very accessible, with slopes in the courtyard and ramps available if needed. The bar is located upstairs and as they are Grade 2 listed they do not have a lift, they will however offer waitress service to guests throughout the day and evening.</p><p>You can also reserve yourself a parking space close to the venue if needed. Just get in touch with Dodmoor to reserve a spot.</p>'
+					}
 				]
 			}
 		]
