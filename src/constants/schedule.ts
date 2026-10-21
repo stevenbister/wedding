@@ -46,8 +46,8 @@ export const schedule = [
 	},
 	{
 		event: 'End of the night',
-		time: '11.30pm',
-		content: 'Music and bar closes around now, taxis will arrive shortly.',
+		time: '12pm',
+		content: 'Music ends and bar closes around now, taxis will arrive shortly.',
 		illustration: Shoe
 	}
 ];

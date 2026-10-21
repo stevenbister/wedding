@@ -47,7 +47,7 @@ export const content = {
 					{
 						title: 'What’s the timelines of the day?',
 						content:
-							'We ask that daytime guests arrive between 12pm-12.30pm, and take your seats at 12.40, ready for the ceremony to start at 1pm. We’ll follow this with cocktail hour, the wedding breakfast, and then party time. The DJ will stop spinning and the bar will stop serving at 12am. We’ll then ask you to start making your way home by 12.30/1am.'
+							'We ask that daytime guests arrive between 12pm-12.30pm, and take your seats at 12.50, ready for the ceremony to start at 1pm. We’ll follow this with cocktail hour, the wedding breakfast, and then party time. The DJ will stop spinning and the bar will stop serving at 12am. We’ll then ask you to start making your way home by 12.30am.'
 					},
 					{
 						title: 'How and when to RSVP?',
