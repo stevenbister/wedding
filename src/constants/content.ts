@@ -113,7 +113,8 @@ export const content = {
 				info: [
 					{
 						title: 'What’s on the menu?',
-						content: 'The most important question - and we hope to keep you well fed throughout.'
+						content:
+							"<p>The most important question.</p><p>We're still finalising the menu, but we hope to keep you well fed throughout. You can expect an Italian affair with canapes, a three course wedding breakfast and some pizza to round off the night. (Meats and cheeses always pleases - iykyk).</p>"
 					},
 					{
 						title: 'What if I have dietary requirements?',
