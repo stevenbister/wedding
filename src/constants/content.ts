@@ -181,7 +181,7 @@ export const content = {
 					{
 						title: 'From the M1 South',
 						content:
-							'<p>Exit the M1 at J16 and take the first left towards Daventry. You will quickly arrive at a second roundabout, take the 2nd exit towards Daventry (if you are going to the Holiday Inn first please take the first exit for Flore/Hotel).</p> <p>When you reach the next roundabout on the A5 take the 3rd exit towards Hinckley. Then take the next immediate left signed for Dodford. Dodmoor House is then directly on the right just after the little bridge</p>'
+							'<p>Exit the M1 at J16 and take the first left towards Daventry. You will quickly arrive at a second roundabout, take the 2nd exit towards Daventry (if you are going to the Holiday Inn first please take the first exit for Flore/Hotel).</p> <p>When you reach the next roundabout on the A5 take the 3rd exit towards Hinckley. Then take the next immediate left signed for Dodford. Dodmoor House is then directly on the right just after the little bridge.</p>'
 					},
 					{
 						title: 'From the A45 (Daventry (west) or Northampton (east)',
@@ -191,7 +191,7 @@ export const content = {
 					{
 						title: 'From the M40',
 						content:
-							'<p>Take the exit at junction 10 of the M40 and follow the A43 towards Northampton and Towcester</p> <p>When you arrive at Towcester (with a VW garage on the roundabout), take the second exit (left) signposted towards the A5 – Hinckley or Weedon (nb: you do not go into Towcester)</p> <p>Follow the A5 for about 10 minutes until you reach the crossroads where the A45 crosses over the A5 at Weedon.</p> <p>Go straight over the roundabout and then take the first turning left to Dodford (with a large weight restriction sign). Go over the canal bridge and Dodmoor House is immediately on the right-hand side.</p>'
+							'<p>Take the exit at junction 10 of the M40 and follow the A43 towards Northampton and Towcester</p> <p>When you arrive at Towcester (with a VW garage on the roundabout), take the second exit (left) signposted towards the A5 – Hinckley or Weedon (nb: you do not go into Towcester).</p> <p>Follow the A5 for about 10 minutes until you reach the crossroads where the A45 crosses over the A5 at Weedon.</p> <p>Go straight over the roundabout and then take the first turning left to Dodford (with a large weight restriction sign). Go over the canal bridge and Dodmoor House is immediately on the right-hand side.</p>'
 					}
 				]
 			},
